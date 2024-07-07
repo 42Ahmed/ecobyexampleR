@@ -1,0 +1,978 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Example &#8212; Econometrics by Example R Solutions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'four';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Breusch–Pagan (BP) test" href="five.html" />
+    <link rel="prev" title="Wage function" href="three.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Econometrics by Example R Solutions - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Econometrics by Example R Solutions - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Econometrics by Example R Solutions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="one.html">Wage Function</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="two.html">Cobb Douglas Function</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="three.html">Wage function</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Example</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="five.html">Breusch–Pagan (BP) test</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="six.html">US Consumption function 1947-2000</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/42Ahmed/ecobyexampleR" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/42Ahmed/ecobyexampleR/issues/new?title=Issue%20on%20page%20%2Ffour.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/four.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-components-analysis">Principal components analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">tidymodels</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">multcomp</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table4_2.xls&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 3</caption>
+<thead>
+	<tr><th scope=col>expend</th><th scope=col>income</th><th scope=col>wealth</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>70</td><td> 80</td><td> 810</td></tr>
+	<tr><td>65</td><td>100</td><td>1009</td></tr>
+	<tr><td>90</td><td>120</td><td>1273</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">expend</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">income</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wealth</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">$</span><span class="n">r.squared</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>24.77473327</td><td>6.75249960</td><td> 3.6689722</td><td>0.007975077</td></tr>
+	<tr><td>income     </td><td> 0.94153734</td><td>0.82289826</td><td> 1.1441722</td><td>0.290164748</td></tr>
+	<tr><td>wealth     </td><td>-0.04243453</td><td>0.08066448</td><td>-0.5260621</td><td>0.615094539</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html">0.963504395243514</div></div>
+</div>
+<p>none of the slope coeffi cients is statistically
+signifi cant, as the t values are statistically insignificant. Yet the R2 value is very high.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">expend</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">income</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span><span class="o">$</span><span class="n">r.squared</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>24.4545455</td><td>6.41381730</td><td> 3.812791</td><td>5.142172e-03</td></tr>
+	<tr><td>income     </td><td> 0.5090909</td><td>0.03574281</td><td>14.243171</td><td>5.752746e-07</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html">0.962061560486757</div></div>
+</div>
+<p>income alone has significant impact on expenditure,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">expend</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">wealth</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model3</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model3</span><span class="p">)</span><span class="o">$</span><span class="n">r.squared</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>24.41104485</td><td>6.874096840</td><td> 3.551164</td><td>7.496699e-03</td></tr>
+	<tr><td>wealth     </td><td> 0.04976377</td><td>0.003743986</td><td>13.291656</td><td>9.802080e-07</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html">0.956679038871206</div></div>
+</div>
+<p>wealth alone has a significant impact on expenditure</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">wealth</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">income</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model4</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model4</span><span class="p">)</span><span class="o">$</span><span class="n">r.squared</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td> 7.545455</td><td>29.4758107</td><td> 0.255988</td><td>8.044195e-01</td></tr>
+	<tr><td>income     </td><td>10.190909</td><td> 0.1642623</td><td>62.040474</td><td>5.064901e-12</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html">0.997925860058925</div></div>
+</div>
+<p>wealth and income are highly related</p>
+<section id="example">
+<h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table4_4.xls&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 25</caption>
+<thead>
+	<tr><th scope=col>taxableinc</th><th scope=col>federaltax</th><th scope=col>hsiblings</th><th scope=col>hfathereduc</th><th scope=col>hmothereduc</th><th scope=col>siblings</th><th scope=col>lfp</th><th scope=col>hours</th><th scope=col>kidsl6</th><th scope=col>kids618</th><th scope=col>⋯</th><th scope=col>hage</th><th scope=col>heduc</th><th scope=col>hwage</th><th scope=col>faminc</th><th scope=col>mtr</th><th scope=col>mothereduc</th><th scope=col>fathereduc</th><th scope=col>unemployment</th><th scope=col>largecity</th><th scope=col>exper</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>⋯</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>12200</td><td>1494</td><td>1</td><td>14</td><td>16</td><td>4</td><td>1</td><td>1610</td><td>1</td><td>0</td><td>⋯</td><td>34</td><td>12</td><td>4.0288</td><td>16310</td><td>0.7215</td><td>12</td><td>7</td><td> 5</td><td>0</td><td>14</td></tr>
+	<tr><td>18000</td><td>2615</td><td>8</td><td> 7</td><td> 3</td><td>0</td><td>1</td><td>1656</td><td>0</td><td>2</td><td>⋯</td><td>30</td><td> 9</td><td>8.4416</td><td>21800</td><td>0.6615</td><td> 7</td><td>7</td><td>11</td><td>1</td><td> 5</td></tr>
+	<tr><td>24000</td><td>3957</td><td>4</td><td> 7</td><td>10</td><td>2</td><td>1</td><td>1980</td><td>1</td><td>3</td><td>⋯</td><td>40</td><td>12</td><td>3.5807</td><td>21040</td><td>0.6915</td><td>12</td><td>7</td><td> 5</td><td>0</td><td>15</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Hours: hours worked in 1975 (dependent variable)<br />
+Kidslt6: number of kids under age 6<br />
+Kidsge6: number of kids between ages 6 and 18<br />
+Age: woman’s age in years<br />
+Educ: years of schooling<br />
+Wage: estimated wage from earnings<br />
+Hushrs: hours worked by husband<br />
+Husage: husband’s age<br />
+Huseduc: husband’s years of schooling<br />
+Huswage: husband’s hourly wage, 1975<br />
+Faminc: family income in 1975<br />
+Mtr: federal marginal tax rate facing a woman<br />
+motheduc: mother’s years of schooling<br />
+fatheduc: father’s years of schooling<br />
+Unem: unemployment rate in county of residence<br />
+exper: actual labor market experience</p>
+<p>assess the impact of several socio-economic variables on married women’s hours of work
+in the labor market. This is cross-sectional data on 753 married women for the year
+1975. It should be noted that there were 325 married women who did not work and
+hence had zero hours of work.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">hours</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">educ</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">exper</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">faminc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fathereduc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">            </span><span class="n">hage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">heduc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hhours</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hwage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">kidsl6</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">kids618</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="n">wage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mothereduc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mtr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">unemployment</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="p">)</span>
+
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 16 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept) </td><td> 5805.4723070</td><td>6.843439e+02</td><td> 8.4832671</td><td>1.194368e-16</td></tr>
+	<tr><td>age         </td><td>  -24.0044110</td><td>6.859174e+00</td><td>-3.4996069</td><td>4.939481e-04</td></tr>
+	<tr><td>educ        </td><td>  -13.7760578</td><td>1.528931e+01</td><td>-0.9010257</td><td>3.678690e-01</td></tr>
+	<tr><td>exper       </td><td>   34.9538799</td><td>3.456319e+00</td><td>10.1130377</td><td>1.331411e-22</td></tr>
+	<tr><td>faminc      </td><td>    0.0156683</td><td>4.641855e-03</td><td> 3.3754394</td><td>7.755884e-04</td></tr>
+	<tr><td>fathereduc  </td><td>   -4.8206771</td><td>8.673176e+00</td><td>-0.5558145</td><td>5.785063e-01</td></tr>
+	<tr><td>hage        </td><td>   -5.0282298</td><td>6.669922e+00</td><td>-0.7538664</td><td>4.511702e-01</td></tr>
+	<tr><td>heduc       </td><td>  -11.6952485</td><td>1.101195e+01</td><td>-1.0620504</td><td>2.885607e-01</td></tr>
+	<tr><td>hhours      </td><td>   -0.3389067</td><td>5.107115e-02</td><td>-6.6359714</td><td>6.246245e-11</td></tr>
+	<tr><td>hwage       </td><td> -107.3373543</td><td>1.091622e+01</td><td>-9.8328291</td><td>1.600070e-21</td></tr>
+	<tr><td>kidsl6      </td><td> -322.7168869</td><td>5.345385e+01</td><td>-6.0372993</td><td>2.482936e-09</td></tr>
+	<tr><td>kids618     </td><td>   -4.0422005</td><td>2.149471e+01</td><td>-0.1880556</td><td>8.508849e-01</td></tr>
+	<tr><td>wage        </td><td>   51.6767604</td><td>8.714492e+00</td><td> 5.9299799</td><td>4.655600e-09</td></tr>
+	<tr><td>mothereduc  </td><td>    9.8422151</td><td>9.195859e+00</td><td> 1.0702878</td><td>2.848402e-01</td></tr>
+	<tr><td>mtr         </td><td>-3956.7686273</td><td>7.215385e+02</td><td>-5.4837941</td><td>5.723755e-08</td></tr>
+	<tr><td>unemployment</td><td>   -7.6865804</td><td>7.979074e+00</td><td>-0.9633424</td><td>3.356917e-01</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.434307</td><td>0.4227936</td><td>661.9732</td><td>37.72179</td><td>8.317512e-81</td><td>15</td><td>-5951.279</td><td>11936.56</td><td>12015.17</td><td>322959634</td><td>737</td><td>753</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'taxableinc'</li><li>'federaltax'</li><li>'hsiblings'</li><li>'hfathereduc'</li><li>'hmothereduc'</li><li>'siblings'</li><li>'lfp'</li><li>'hours'</li><li>'kidsl6'</li><li>'kids618'</li><li>'age'</li><li>'educ'</li><li>'wage'</li><li>'wage76'</li><li>'hhours'</li><li>'hage'</li><li>'heduc'</li><li>'hwage'</li><li>'faminc'</li><li>'mtr'</li><li>'mothereduc'</li><li>'fathereduc'</li><li>'unemployment'</li><li>'largecity'</li><li>'exper'</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">summarize</span><span class="p">(</span><span class="n">correlation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">hage</span><span class="p">,</span><span class="w"> </span><span class="n">faminc</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;complete.obs&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 1</caption>
+<thead>
+	<tr><th scope=col>correlation</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.04050263</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">correlation_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;complete.obs&quot;</span><span class="p">)</span>
+
+<span class="nf">heatmap</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colorRampPalette</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;white&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">))(</span><span class="m">100</span><span class="p">),</span>
+<span class="w">        </span><span class="n">symm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">         </span>
+<span class="w">        </span><span class="n">margins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">),</span><span class="w">   </span>
+<span class="w">        </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Correlation Heatmap of df2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/932da9dbc042ccb4bf75a5454ee66fb16ac26706dbd2f08ed6c4c57ff4779043.png"><img alt="_images/932da9dbc042ccb4bf75a5454ee66fb16ac26706dbd2f08ed6c4c57ff4779043.png" src="_images/932da9dbc042ccb4bf75a5454ee66fb16ac26706dbd2f08ed6c4c57ff4779043.png" style="width: 420px; height: 420px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">vif</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class=dl-inline><dt>age</dt><dd>5.26144147726373</dd><dt>educ</dt><dd>2.0858157402719</dd><dt>exper</dt><dd>1.33480562987452</dd><dt>faminc</dt><dd>5.49467416520725</dd><dt>fathereduc</dt><dd>1.64735313494315</dd><dt>hage</dt><dd>4.95813811611547</dd><dt>heduc</dt><dd>1.89893838127637</dd><dt>hhours</dt><dd>1.58762941970657</dd><dt>hwage</dt><dd>3.65996838421493</dd><dt>kidsl6</dt><dd>1.34613841992449</dd><dt>kids618</dt><dd>1.3812278886656</dd><dt>wage</dt><dd>1.36962420005194</dd><dt>mothereduc</dt><dd>1.6456166790573</dd><dt>mtr</dt><dd>6.22848954766369</dd><dt>unemployment</dt><dd>1.06008242126237</dd></dl>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model6</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">hours</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">educ</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">exper</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">faminc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hhours</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hwage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">kidsl6</span><span class="w">  </span><span class="o">+</span>
+<span class="w">            </span><span class="n">wage</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="n">mtr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">unemployment</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="p">)</span>
+
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model6</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 11 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept) </td><td> 5.720767e+03</td><td>6.622272e+02</td><td>  8.6386770</td><td>3.464404e-17</td></tr>
+	<tr><td>age         </td><td>-2.823358e+01</td><td>3.566101e+00</td><td> -7.9172148</td><td>8.858432e-15</td></tr>
+	<tr><td>educ        </td><td>-1.828395e+01</td><td>1.223935e+01</td><td> -1.4938658</td><td>1.356358e-01</td></tr>
+	<tr><td>exper       </td><td> 3.511494e+01</td><td>3.394298e+00</td><td> 10.3452722</td><td>1.595033e-23</td></tr>
+	<tr><td>faminc      </td><td> 1.592231e-02</td><td>4.509078e-03</td><td>  3.5311679</td><td>4.392850e-04</td></tr>
+	<tr><td>hhours      </td><td>-3.461675e-01</td><td>5.018601e-02</td><td> -6.8976900</td><td>1.132866e-11</td></tr>
+	<tr><td>hwage       </td><td>-1.100438e+02</td><td>1.066498e+01</td><td>-10.3182403</td><td>2.040707e-23</td></tr>
+	<tr><td>kidsl6      </td><td>-3.193502e+02</td><td>5.231116e+01</td><td> -6.1048203</td><td>1.658396e-09</td></tr>
+	<tr><td>wage        </td><td> 5.188557e+01</td><td>8.657064e+00</td><td>  5.9934370</td><td>3.204685e-09</td></tr>
+	<tr><td>mtr         </td><td>-3.929831e+03</td><td>6.850461e+02</td><td> -5.7365936</td><td>1.406737e-08</td></tr>
+	<tr><td>unemployment</td><td>-7.721889e+00</td><td>7.940710e+00</td><td> -0.9724432</td><td>3.311470e-01</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.432122</td><td>0.4244687</td><td>661.0119</td><td>56.46187</td><td>1.932607e-84</td><td>10</td><td>-5952.73</td><td>11929.46</td><td>11984.95</td><td>324207062</td><td>742</td><td>753</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">vif</span><span class="p">(</span><span class="n">model6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class=dl-inline><dt>age</dt><dd>1.42629876639497</dd><dt>educ</dt><dd>1.34053961380487</dd><dt>exper</dt><dd>1.29107879991459</dd><dt>faminc</dt><dd>5.19991905936222</dd><dt>hhours</dt><dd>1.53753610679107</dd><dt>hwage</dt><dd>3.50360087467717</dd><dt>kidsl6</dt><dd>1.29295288892452</dd><dt>wage</dt><dd>1.35556617939112</dd><dt>mtr</dt><dd>5.63073994873757</dd><dt>unemployment</dt><dd>1.05296872093097</dd></dl>
+</div></div>
+</div>
+</section>
+<section id="principal-components-analysis">
+<h1>Principal components analysis<a class="headerlink" href="#principal-components-analysis" title="Link to this heading">#</a></h1>
+<p>Results are different from the book</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">pca_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">prcomp</span><span class="p">(</span><span class="n">scaled_data</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">pca_components</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pca_result</span><span class="o">$</span><span class="n">rotation</span>
+
+<span class="c1"># Extract standardized scores (principal component scores)</span>
+<span class="n">pca_scores</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pca_result</span><span class="o">$</span><span class="n">x</span>
+
+<span class="c1"># Extract standard deviations of principal components</span>
+<span class="n">pca_std_dev</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pca_result</span><span class="o">$</span><span class="n">sdev</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">variance_explained</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pca_std_dev</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">pca_std_dev</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">screeplot</span><span class="p">(</span><span class="n">pca_result</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lines&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Scree Plot&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/25e52c20db9ea474a2e55fe4197dd2f1f8b51ef907f6e093d750864699fc8968.png"><img alt="_images/25e52c20db9ea474a2e55fe4197dd2f1f8b51ef907f6e093d750864699fc8968.png" src="_images/25e52c20db9ea474a2e55fe4197dd2f1f8b51ef907f6e093d750864699fc8968.png" style="width: 420px; height: 420px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">pca_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Importance of components:
+                         PC1    PC2    PC3     PC4     PC5     PC6     PC7
+Standard deviation     2.019 1.7615 1.6080 1.56381 1.18734 1.16346 1.13759
+Proportion of Variance 0.163 0.1241 0.1034 0.09782 0.05639 0.05415 0.05176
+Cumulative Proportion  0.163 0.2871 0.3906 0.48837 0.54476 0.59891 0.65067
+                           PC8     PC9    PC10    PC11    PC12    PC13    PC14
+Standard deviation     0.98662 0.93992 0.93027 0.88700 0.85488 0.83909 0.79942
+Proportion of Variance 0.03894 0.03534 0.03462 0.03147 0.02923 0.02816 0.02556
+Cumulative Proportion  0.68961 0.72495 0.75956 0.79103 0.82027 0.84843 0.87399
+                          PC15    PC16    PC17   PC18    PC19    PC20    PC21
+Standard deviation     0.77286 0.71328 0.65361 0.6285 0.58349 0.56742 0.44504
+Proportion of Variance 0.02389 0.02035 0.01709 0.0158 0.01362 0.01288 0.00792
+Cumulative Proportion  0.89788 0.91824 0.93532 0.9511 0.96474 0.97762 0.98554
+                          PC22    PC23    PC24    PC25
+Standard deviation     0.35882 0.32453 0.31267 0.17204
+Proportion of Variance 0.00515 0.00421 0.00391 0.00118
+Cumulative Proportion  0.99069 0.99491 0.99882 1.00000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="three.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Wage function</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="five.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Breusch–Pagan (BP) test</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-components-analysis">Principal components analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed H. Darwish
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
