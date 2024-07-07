@@ -1,0 +1,978 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Wage Function &#8212; Econometrics by Example R Solutions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'one';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Cobb Douglas Function" href="two.html" />
+    <link rel="prev" title="Econometrics by Example R Solutions" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Econometrics by Example R Solutions - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Econometrics by Example R Solutions - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Econometrics by Example R Solutions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Wage Function</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="two.html">Cobb Douglas Function</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="three.html">Wage function</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="four.html">Example</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="five.html">Breusch–Pagan (BP) test</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="six.html">US Consumption function 1947-2000</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/42Ahmed/ecobyexampleR" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/42Ahmed/ecobyexampleR/issues/new?title=Issue%20on%20page%20%2Fone.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/one.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Wage Function</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Wage Function</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.1.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a">a.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b">b</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">c.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d">d.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e">e.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f">f.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h">h.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">tidymodels</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">multcomp</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="wage-function">
+<h1>Wage Function<a class="headerlink" href="#wage-function" title="Link to this heading">#</a></h1>
+<p>Wage: Hourly wage in dollars, which is the dependent variable.<br />
+Female: Gender, coded 1 for female, 0 for male<br />
+Nonwhite: Race, coded 1 for nonwhite workers, 0 for white workers<br />
+Union: Union status, coded 1 if in a union job, 0 otherwise<br />
+Education: Education (in years)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table1_1.xls&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 17</caption>
+<thead>
+	<tr><th scope=col>obs</th><th scope=col>wage</th><th scope=col>female</th><th scope=col>nonwhite</th><th scope=col>union</th><th scope=col>education</th><th scope=col>exper</th><th scope=col>age</th><th scope=col>wind</th><th scope=col>femalenonw</th><th scope=col>lnwage</th><th scope=col>education_exper</th><th scope=col>_Ifemale_1</th><th scope=col>_IfemXeduca_1</th><th scope=col>_IfemXexper_1</th><th scope=col>_Inonwhite_1</th><th scope=col>_InonXeduca_1</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>1</td><td>11.55</td><td>1</td><td>0</td><td>0</td><td>12</td><td>20</td><td>38</td><td>1</td><td>0</td><td>2.446686</td><td>240</td><td>1</td><td>12</td><td>20</td><td>0</td><td> 0</td></tr>
+	<tr><td>2</td><td> 5.00</td><td>0</td><td>0</td><td>0</td><td> 9</td><td> 9</td><td>24</td><td>0</td><td>0</td><td>1.609438</td><td> 81</td><td>0</td><td> 0</td><td> 0</td><td>0</td><td> 0</td></tr>
+	<tr><td>3</td><td>12.00</td><td>0</td><td>0</td><td>0</td><td>16</td><td>15</td><td>37</td><td>1</td><td>0</td><td>2.484907</td><td>240</td><td>0</td><td> 0</td><td> 0</td><td>0</td><td> 0</td></tr>
+	<tr><td>4</td><td> 7.00</td><td>0</td><td>1</td><td>1</td><td>14</td><td>38</td><td>58</td><td>0</td><td>0</td><td>1.945910</td><td>532</td><td>0</td><td> 0</td><td> 0</td><td>1</td><td>14</td></tr>
+	<tr><td>5</td><td>21.15</td><td>1</td><td>1</td><td>0</td><td>16</td><td>19</td><td>41</td><td>1</td><td>1</td><td>3.051640</td><td>304</td><td>1</td><td>16</td><td>19</td><td>1</td><td>16</td></tr>
+	<tr><td>6</td><td> 6.92</td><td>1</td><td>0</td><td>0</td><td>12</td><td> 4</td><td>22</td><td>1</td><td>0</td><td>1.934416</td><td> 48</td><td>1</td><td>12</td><td> 4</td><td>0</td><td> 0</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">glimpse</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rows: 1,289
+Columns: 17
+$ obs             &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,…
+$ wage            &lt;dbl&gt; 11.55, 5.00, 12.00, 7.00, 21.15, 6.92, 10.00, 8.00, 15…
+$ female          &lt;dbl&gt; 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, …
+$ nonwhite        &lt;dbl&gt; 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, …
+$ union           &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, …
+$ education       &lt;dbl&gt; 12, 9, 16, 14, 16, 12, 12, 12, 18, 18, 20, 12, 5, 12, …
+$ exper           &lt;dbl&gt; 20, 9, 15, 38, 19, 4, 14, 32, 7, 5, 31, 7, 31, 14, 15,…
+$ age             &lt;dbl&gt; 38, 24, 37, 58, 41, 22, 32, 50, 31, 29, 57, 25, 42, 32…
+$ wind            &lt;dbl&gt; 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, …
+$ femalenonw      &lt;dbl&gt; 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, …
+$ lnwage          &lt;dbl&gt; 2.446686, 1.609438, 2.484907, 1.945910, 3.051640, 1.93…
+$ education_exper &lt;dbl&gt; 240, 81, 240, 532, 304, 48, 168, 384, 126, 90, 620, 84…
+$ `_Ifemale_1`    &lt;dbl&gt; 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, …
+$ `_IfemXeduca_1` &lt;dbl&gt; 12, 0, 0, 0, 16, 12, 12, 12, 0, 18, 0, 12, 0, 0, 0, 14…
+$ `_IfemXexper_1` &lt;dbl&gt; 20, 0, 0, 0, 19, 4, 14, 32, 0, 5, 0, 7, 0, 0, 0, 26, 0…
+$ `_Inonwhite_1`  &lt;dbl&gt; 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, …
+$ `_InonXeduca_1` &lt;dbl&gt; 0, 0, 0, 14, 16, 0, 0, 12, 0, 0, 0, 0, 0, 12, 0, 14, 1…
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      obs            wage           female          nonwhite     
+ Min.   :   1   Min.   : 0.84   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.: 323   1st Qu.: 6.92   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median : 645   Median :10.08   Median :0.0000   Median :0.0000  
+ Mean   : 645   Mean   :12.37   Mean   :0.4973   Mean   :0.1528  
+ 3rd Qu.: 967   3rd Qu.:15.63   3rd Qu.:1.0000   3rd Qu.:0.0000  
+ Max.   :1289   Max.   :64.08   Max.   :1.0000   Max.   :1.0000  
+     union         education         exper            age       
+ Min.   :0.000   Min.   : 0.00   Min.   : 0.00   Min.   :18.00  
+ 1st Qu.:0.000   1st Qu.:12.00   1st Qu.: 9.00   1st Qu.:29.00  
+ Median :0.000   Median :12.00   Median :18.00   Median :37.00  
+ Mean   :0.159   Mean   :13.15   Mean   :18.79   Mean   :37.93  
+ 3rd Qu.:0.000   3rd Qu.:16.00   3rd Qu.:27.00   3rd Qu.:47.00  
+ Max.   :1.000   Max.   :20.00   Max.   :56.00   Max.   :65.00  
+      wind          femalenonw          lnwage        education_exper
+ Min.   :0.0000   Min.   :0.00000   Min.   :-0.1744   Min.   :  0.0  
+ 1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.: 1.9344   1st Qu.:120.0  
+ Median :0.0000   Median :0.00000   Median : 2.3106   Median :228.0  
+ Mean   :0.4073   Mean   :0.08379   Mean   : 2.3424   Mean   :241.1  
+ 3rd Qu.:1.0000   3rd Qu.:0.00000   3rd Qu.: 2.7492   3rd Qu.:352.0  
+ Max.   :1.0000   Max.   :1.00000   Max.   : 4.1601   Max.   :740.0  
+   _Ifemale_1     _IfemXeduca_1    _IfemXexper_1     _Inonwhite_1   
+ Min.   :0.0000   Min.   : 0.000   Min.   : 0.000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.:0.0000  
+ Median :0.0000   Median : 0.000   Median : 0.000   Median :0.0000  
+ Mean   :0.4973   Mean   : 6.493   Mean   : 9.212   Mean   :0.1528  
+ 3rd Qu.:1.0000   3rd Qu.:12.000   3rd Qu.:17.000   3rd Qu.:0.0000  
+ Max.   :1.0000   Max.   :20.000   Max.   :56.000   Max.   :1.0000  
+ _InonXeduca_1   
+ Min.   : 0.000  
+ 1st Qu.: 0.000  
+ Median : 0.000  
+ Mean   : 1.921  
+ 3rd Qu.: 0.000  
+ Max.   :20.000  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>1.1.<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Consider the regression results given in Table 1.2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">wage</span><span class="o">~</span><span class="n">female</span><span class="o">+</span><span class="n">nonwhite</span><span class="o">+</span><span class="n">union</span><span class="o">+</span><span class="n">education</span><span class="o">+</span><span class="n">exper</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="nf">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = wage ~ female + nonwhite + union + education + exper, 
+    data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-20.781  -3.760  -1.044   2.418  50.414 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -7.18334    1.01579  -7.072 2.51e-12 ***
+female      -3.07488    0.36462  -8.433  &lt; 2e-16 ***
+nonwhite    -1.56531    0.50919  -3.074  0.00216 ** 
+union        1.09598    0.50608   2.166  0.03052 *  
+education    1.37030    0.06590  20.792  &lt; 2e-16 ***
+exper        0.16661    0.01605  10.382  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 6.508 on 1283 degrees of freedom
+Multiple R-squared:  0.3233,	Adjusted R-squared:  0.3207 
+F-statistic: 122.6 on 5 and 1283 DF,  p-value: &lt; 2.2e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>-7.1833382</td><td>1.01578786</td><td>-7.071691</td><td>2.508276e-12</td></tr>
+	<tr><td>female     </td><td>-3.0748754</td><td>0.36461621</td><td>-8.433184</td><td>8.939423e-17</td></tr>
+	<tr><td>nonwhite   </td><td>-1.5653133</td><td>0.50918754</td><td>-3.074139</td><td>2.155664e-03</td></tr>
+	<tr><td>union      </td><td> 1.0959758</td><td>0.50607809</td><td> 2.165626</td><td>3.052356e-02</td></tr>
+	<tr><td>education  </td><td> 1.3703010</td><td>0.06590421</td><td>20.792312</td><td>5.507613e-83</td></tr>
+	<tr><td>exper      </td><td> 0.1666065</td><td>0.01604756</td><td>10.382050</td><td>2.659960e-24</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>the <strong>intercept value</strong> is about –7.1833.<br />
+Literally interpreted, this would mean the average hourly wage is –$7.1833<br />
+if the values of all the regressors in that regression are set equal to zero</p>
+<p>The <strong>female coefficient</strong>  –3.07 means, holding all other variables constant, that the<br />
+average female hourly wage is lower than the average male hourly wage by about 3<br />
+dollars, ceteris paribus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">glance</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.3233388</td><td>0.3207018</td><td>6.508137</td><td>122.6149</td><td>3.453151e-106</td><td>5</td><td>-4240.37</td><td>8494.741</td><td>8530.872</td><td>54342.54</td><td>1283</td><td>1289</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">augment</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="nf">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 12</caption>
+<thead>
+	<tr><th scope=col>wage</th><th scope=col>female</th><th scope=col>nonwhite</th><th scope=col>union</th><th scope=col>education</th><th scope=col>exper</th><th scope=col>.fitted</th><th scope=col>.resid</th><th scope=col>.hat</th><th scope=col>.sigma</th><th scope=col>.cooksd</th><th scope=col>.std.resid</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>11.55</td><td>1</td><td>0</td><td>0</td><td>12</td><td>20</td><td> 9.517529</td><td>  2.03247160</td><td>0.001942952</td><td>6.510426</td><td>3.170558e-05</td><td> 0.31260084</td></tr>
+	<tr><td> 5.00</td><td>0</td><td>0</td><td>0</td><td> 9</td><td> 9</td><td> 6.648829</td><td> -1.64882930</td><td>0.004661005</td><td>6.510511</td><td>5.032970e-05</td><td>-0.25394141</td></tr>
+	<tr><td>12.00</td><td>0</td><td>0</td><td>0</td><td>16</td><td>15</td><td>17.240575</td><td> -5.24057529</td><td>0.002569388</td><td>6.509025</td><td>2.790986e-04</td><td>-0.80627086</td></tr>
+	<tr><td> 7.00</td><td>0</td><td>1</td><td>1</td><td>14</td><td>38</td><td>17.862586</td><td>-10.86258593</td><td>0.011178819</td><td>6.503522</td><td>5.308384e-03</td><td>-1.67848587</td></tr>
+	<tr><td>21.15</td><td>1</td><td>1</td><td>0</td><td>16</td><td>19</td><td>13.266813</td><td>  7.88318701</td><td>0.007329089</td><td>6.506923</td><td>1.818773e-03</td><td> 1.21574509</td></tr>
+	<tr><td> 6.92</td><td>1</td><td>0</td><td>0</td><td>12</td><td> 4</td><td> 6.851824</td><td>  0.06817595</td><td>0.003318529</td><td>6.510674</td><td>6.109851e-08</td><td> 0.01049292</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<section id="a">
+<h3>a.<a class="headerlink" href="#a" title="Link to this heading">#</a></h3>
+<p>Suppose you want to test the hypothesis that the true or population regression coefficient of
+the education variable is 1.<br />
+How would you test this hypothesis? Show the necessary
+calculations.</p>
+<div class="math notranslate nohighlight">
+\[
+wage = \beta_0 + \beta_1~ \text{female} + \beta_2~ \text{nonwhite} + \beta_3~ \text{union} + \beta_4~ \text{education} + \beta_5~ \text{exper}
+\]</div>
+<p>\begin{align}
+H_0: \beta_4 = 1 \
+H_1: \beta_4 \neq 1
+\end{align}</p>
+<p>\begin{align}
+t &amp;= \frac{b - b_0}{se(b)}\
+t &amp;= \frac{1.3703010 - 1}{0.06590421} = 5.619
+\end{align}</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hypothesis_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">linearHypothesis</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;education = 1&quot;</span><span class="p">)</span>
+<span class="n">hypothesis_test</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A anova: 2 × 6</caption>
+<thead>
+	<tr><th></th><th scope=col>Res.Df</th><th scope=col>RSS</th><th scope=col>Df</th><th scope=col>Sum of Sq</th><th scope=col>F</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>1284</td><td>55679.75</td><td>NA</td><td>      NA</td><td>      NA</td><td>          NA</td></tr>
+	<tr><th scope=row>2</th><td>1283</td><td>54342.54</td><td> 1</td><td>1337.201</td><td>31.57064</td><td>2.356207e-08</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glht</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">linfct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;education = 1&quot;</span><span class="p">))</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	 Simultaneous Tests for General Linear Hypotheses
+
+Fit: lm(formula = wage ~ female + nonwhite + union + education + exper, 
+    data = df)
+
+Linear Hypotheses:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+education == 1   1.3703     0.0659   5.619 2.36e-08 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+(Adjusted p values reported -- single-step method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># manual calculation</span>
+
+<span class="n">coef</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span>
+<span class="n">beta_education</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coef</span><span class="p">[</span><span class="s">&quot;education&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Estimate&quot;</span><span class="p">]</span>
+<span class="n">se_education</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coef</span><span class="p">[</span><span class="s">&quot;education&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Std. Error&quot;</span><span class="p">]</span>
+
+
+<span class="n">t_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">beta_education</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">se_education</span>
+
+<span class="n">degreesfreedom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">df.residual</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">p_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">pt</span><span class="p">(</span><span class="o">-</span><span class="nf">abs</span><span class="p">(</span><span class="n">t_value</span><span class="p">),</span><span class="w"> </span><span class="n">degreesfreedom</span><span class="p">)</span>
+
+<span class="n">t_value</span>
+<span class="n">p_value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">5.61877531138879</div><div class="output text_html">2.35620718007122e-08</div></div>
+</div>
+</section>
+<section id="b">
+<h3>b<a class="headerlink" href="#b" title="Link to this heading">#</a></h3>
+<p>Would you reject or not reject the hypothesis that the true union regression coefficient is
+1?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">test_union</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glht</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">linfct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;union = 1&quot;</span><span class="p">))</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">test_union</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	 Simultaneous Tests for General Linear Hypotheses
+
+Fit: lm(formula = wage ~ female + nonwhite + union + education + exper, 
+    data = df)
+
+Linear Hypotheses:
+           Estimate Std. Error t value Pr(&gt;|t|)
+union == 1   1.0960     0.5061    0.19     0.85
+(Adjusted p values reported -- single-step method)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fail to reject</p>
+</section>
+<section id="c">
+<h3>c.<a class="headerlink" href="#c" title="Link to this heading">#</a></h3>
+<p>Can you take the logs of the nominal variables, such as gender, race and union status?
+Why or why not?</p>
+<p>no, not numerical data</p>
+</section>
+<section id="d">
+<h3>d.<a class="headerlink" href="#d" title="Link to this heading">#</a></h3>
+<p>What other variables are missing from the model?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">colnames</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'obs'</li><li>'wage'</li><li>'female'</li><li>'nonwhite'</li><li>'union'</li><li>'education'</li><li>'exper'</li><li>'age'</li><li>'wind'</li><li>'femalenonw'</li><li>'lnwage'</li><li>'education_exper'</li><li>'_Ifemale_1'</li><li>'_IfemXeduca_1'</li><li>'_IfemXexper_1'</li><li>'_Inonwhite_1'</li><li>'_InonXeduca_1'</li></ol>
+</div></div>
+</div>
+<p>age, wind, femalenonw, lnwage, education_exper</p>
+</section>
+<section id="e">
+<h3>e.<a class="headerlink" href="#e" title="Link to this heading">#</a></h3>
+<p>Would you run separate wage regressions for white and nonwhite workers,<br />
+male and female workers, and union and non-union workers? And how
+would you compare them?</p>
+<p>using f test</p>
+</section>
+<section id="f">
+<h3>f.<a class="headerlink" href="#f" title="Link to this heading">#</a></h3>
+<p>Some states have right-to-work laws (i.e., union membership is not mandatory) and some<br />
+do not have such laws (i.e, union membership is permitted). Is it worth adding a dummy<br />
+variable taking the value of 1 if the right-to-work laws are present and 0 otherwise? A priori,<br />
+what would you expect if this variable is added to the model?</p>
+<p>yes, if it can affect the dependent variable wage</p>
+</section>
+<section id="h">
+<h3>h.<a class="headerlink" href="#h" title="Link to this heading">#</a></h3>
+<p>Would you add the age of the worker as an explanatory variable to the model? Why or
+why not?</p>
+<p>no, <span class="math notranslate nohighlight">\(experience = age - education - 6 \)</span>, will lead to perfect collinearity</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Econometrics by Example R Solutions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="two.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Cobb Douglas Function</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Wage Function</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.1.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a">a.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b">b</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">c.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d">d.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e">e.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f">f.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h">h.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed H. Darwish
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

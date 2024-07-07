@@ -1,0 +1,2061 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cobb Douglas Function &#8212; Econometrics by Example R Solutions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'two';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Wage function" href="three.html" />
+    <link rel="prev" title="Wage Function" href="one.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Econometrics by Example R Solutions - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Econometrics by Example R Solutions - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Econometrics by Example R Solutions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="one.html">Wage Function</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cobb Douglas Function</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="three.html">Wage function</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="four.html">Example</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="five.html">Breusch–Pagan (BP) test</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="six.html">US Consumption function 1947-2000</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/42Ahmed/ecobyexampleR" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/42Ahmed/ecobyexampleR/issues/new?title=Issue%20on%20page%20%2Ftwo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/two.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cobb Douglas Function</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cobb Douglas Function</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-log-model-double-log-constant-elasticity-log-linear">Log-log model (Double log) (Constant elasticity) (log-linear)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-model">linear model</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-restriction">Linear restriction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-calculation">Manual calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-car-package">using car package</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#log-lin-model-growth-model">Log-lin model (growth model)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-it-with-linear-model">Compare it with linear model</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lin-log-model">Lin-LOg model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reciprocol-models">Reciprocol models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression-model">Polynomial regression model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-lin-model-with-quadratic-trend">Log-lin model with quadratic trend</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-linear-and-log-log-log-linear-models">Comparing linear and log-log (log-linear) models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-on-standardized-variables">Regression on standardized variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-through-the-origin-zero-intercept-model">Regression through the origin: zero intercept model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capital-asset-price-model-capm">capital asset price model (CAPM)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#measures-of-goodness-of-fit">Measures of goodness of fit</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a">a</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b">b</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">c</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d">d</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e">e</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">tidymodels</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">multcomp</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="cobb-douglas-function">
+<h1>Cobb Douglas Function<a class="headerlink" href="#cobb-douglas-function" title="Link to this heading">#</a></h1>
+<section id="log-log-model-double-log-constant-elasticity-log-linear">
+<h2>Log-log model (Double log) (Constant elasticity) (log-linear)<a class="headerlink" href="#log-log-model-double-log-constant-elasticity-log-linear" title="Link to this heading">#</a></h2>
+<p>\begin{align}
+\text{output} &amp;= \beta_0 \text{labor}^{\beta_1}\text{capital}^{\beta_2}\
+\ln \text{output}_i &amp;= \ln \beta_0 + \beta_1 \ln \text{labor}_i + \beta_2 \ln \text{capital}_i +u
+\end{align}</p>
+<p>labor input (worker hours, in thousands),<br />
+and capital input (capital expenditure, in thousands of dollars) for the US manufacturing sector.<br />
+The data is cross-sectional, covering 50 states and Washington, DC, for the year 2005.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table2_1.xls&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 12</caption>
+<thead>
+	<tr><th scope=col>obs</th><th scope=col>output</th><th scope=col>labor</th><th scope=col>capital</th><th scope=col>lnoutput</th><th scope=col>lnlabor</th><th scope=col>lncapital</th><th scope=col>lnoutlab</th><th scope=col>lncaplab</th><th scope=col>outputstar</th><th scope=col>capitalstar</th><th scope=col>laborstar</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>1</td><td> 38372840</td><td> 424471</td><td> 2689076</td><td>17.46286</td><td>12.958599</td><td>14.80471</td><td>4.504261</td><td>1.846109</td><td>-0.1079874</td><td> 0.06368887</td><td> 0.1343891</td></tr>
+	<tr><td>2</td><td>  1805427</td><td>  19895</td><td>   57997</td><td>14.40631</td><td> 9.898224</td><td>10.96815</td><td>4.508084</td><td>1.069923</td><td>-0.9230660</td><td>-0.90551400</td><td>-0.9410533</td></tr>
+	<tr><td>3</td><td> 23736129</td><td> 206893</td><td> 2308272</td><td>16.98251</td><td>12.239957</td><td>14.65201</td><td>4.742552</td><td>2.412053</td><td>-0.4342360</td><td>-0.07658678</td><td>-0.4439759</td></tr>
+	<tr><td>4</td><td> 26981983</td><td> 304055</td><td> 1376235</td><td>17.11068</td><td>12.624964</td><td>14.13486</td><td>4.485716</td><td>1.509898</td><td>-0.3618868</td><td>-0.41991854</td><td>-0.1857003</td></tr>
+	<tr><td>5</td><td>217546032</td><td>1809756</td><td>13554116</td><td>19.19792</td><td>14.408703</td><td>16.42220</td><td>4.789218</td><td>2.013498</td><td> 3.8857391</td><td> 4.06601191</td><td> 3.8167481</td></tr>
+	<tr><td>6</td><td> 19462751</td><td> 180366</td><td> 1790751</td><td>16.78401</td><td>12.102743</td><td>14.39815</td><td>4.681270</td><td>2.295402</td><td>-0.5294886</td><td>-0.26722449</td><td>-0.5144899</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">lnoutput</span><span class="o">~</span><span class="w"> </span><span class="n">lnlabor</span><span class="o">+</span><span class="w"> </span><span class="n">lncapital</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>3.8875990</td><td>0.39622813</td><td>9.811517</td><td>4.704731e-13</td></tr>
+	<tr><td>lnlabor    </td><td>0.4683318</td><td>0.09892588</td><td>4.734169</td><td>1.980888e-05</td></tr>
+	<tr><td>lncapital  </td><td>0.5212795</td><td>0.09688703</td><td>5.380281</td><td>2.183108e-06</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9641754</td><td>0.9626828</td><td>0.266752</td><td>645.9316</td><td>1.996821e-35</td><td>2</td><td>-3.426703</td><td>14.85341</td><td>22.58071</td><td>3.415518</td><td>48</td><td>51</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><strong>interpretation of the coefficient of lnlabor</strong> of about 0.47 is that if we
+increase the labor input by 1%, on average, output goes up by about 0.47 %, holding
+the capital input constant</p>
+<p><strong>interpretation of the coefficient of lncapital</strong> of about 0.52 is that if we increase capital input by 1%, on average, the output increases by about 0.52%, holding the labot input constant</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tidy_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tidy</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">tidy_model</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">tidy_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'term'</li><li>'estimate'</li><li>'std.error'</li><li>'statistic'</li><li>'p.value'</li></ol>
+</div><div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'1'</li><li>'2'</li><li>'3'</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">intercept</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tidy_model</span><span class="p">[[</span><span class="m">1</span><span class="p">,</span><span class="s">&#39;estimate&#39;</span><span class="p">]])</span>
+<span class="nf">exp</span><span class="p">(</span><span class="n">intercept</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3.88759899084757</div><div class="output text_html">48.7935919066084</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">beta_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tidy_model</span><span class="p">[[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;estimate&#39;</span><span class="p">]])</span>
+<span class="p">(</span><span class="n">beta_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tidy_model</span><span class="p">[[</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;estimate&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.468331833346232</div><div class="output text_html">0.521279475667115</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">return_to_scale</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">beta_1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beta_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.989611309013347</div></div>
+</div>
+<div class="math notranslate nohighlight">
+\[ output = 48.79 \text{labour}^{0.47} \text{capital}^{0.51} \]</div>
+</section>
+<section id="linear-model">
+<h2>linear model<a class="headerlink" href="#linear-model" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[ \text{output} =  \beta_0 + \beta_1  \text{labor} + \beta_2  \text{capital} \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">output</span><span class="o">~</span><span class="w"> </span><span class="n">labor</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">capital</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>2.336216e+05</td><td>1.250364e+06</td><td> 0.1868428</td><td>8.525714e-01</td></tr>
+	<tr><td>labor      </td><td>4.798736e+01</td><td>7.058245e+00</td><td> 6.7987660</td><td>1.496564e-08</td></tr>
+	<tr><td>capital    </td><td>9.951891e+00</td><td>9.781165e-01</td><td>10.1745459</td><td>1.433023e-13</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9810653</td><td>0.9802763</td><td>6300694</td><td>1243.514</td><td>4.510314e-42</td><td>2</td><td>-869.2846</td><td>1746.569</td><td>1754.297</td><td>1.90554e+15</td><td>48</td><td>51</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tidy_model2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tidy</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+<span class="nf">as.numeric</span><span class="p">(</span><span class="n">tidy_model2</span><span class="o">$</span><span class="n">estimate</span><span class="p">)</span>
+<span class="nf">as.numeric</span><span class="p">(</span><span class="n">tidy_model2</span><span class="o">$</span><span class="n">p.value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>233621.609858679</li><li>47.987358368403</li><li>9.95189072306451</li></ol>
+</div><div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>0.852571362047071</li><li>1.49656436518791e-08</li><li>1.43302279569064e-13</li></ol>
+</div></div>
+</div>
+<p>If labor input increases by a <strong>unit</strong>, the average output goes up by about 48
+<strong>units</strong>, holding capital constant</p>
+</section>
+</section>
+<section id="linear-restriction">
+<h1>Linear restriction<a class="headerlink" href="#linear-restriction" title="Link to this heading">#</a></h1>
+<div class="math notranslate nohighlight">
+\[\beta_1 + \beta_2 = 1\]</div>
+<div class="math notranslate nohighlight">
+\[\beta_1 = 1 - \beta_2  \]</div>
+<section id="manual-calculation">
+<h2>Manual calculation<a class="headerlink" href="#manual-calculation" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[ \ln \text{output}_i = \ln \beta_0 + \beta_1 \ln \text{labor}_i + \beta_2 \ln \text{capital}_i + u_i \]</div>
+<div class="math notranslate nohighlight">
+\[ \ln \text{output}_i = \ln \beta_0 + (1- \beta_2) \ln \text{labor}_i + \beta_2 \ln \text{capital}_i + u_i\]</div>
+<div class="math notranslate nohighlight">
+\[
+\ln \text{output}_i - \ln \text{labor}_i = \ln \beta_0 + 
+\beta_2(\ln \text{capital}_i - \ln \text{labor}_i) + u_i
+\]</div>
+<div class="math notranslate nohighlight">
+\[\ln \left (\frac{\text{output}_i}{\text{labor}_i} \right) = \ln \beta_0 + \beta_2 \ln \left(\frac{\text{capital}_i}{\text{labor}_i}\right) + u_i \]</div>
+<div class="math notranslate nohighlight">
+\[F = \frac{(\text{RSS}_{R} -\text{RSS}_{UR}) / m}{\text{RSS}_{UR} / (n - k)} \sim F_{m,n-k}
+\]</div>
+<p><span class="math notranslate nohighlight">\(RSS_R\)</span>= residual sum of squares from the restricted regression<br />
+<span class="math notranslate nohighlight">\(RSS_{UR}\)</span>= residual sum of squares from the unrestricted regression<br />
+<span class="math notranslate nohighlight">\(m\)</span> = number of linear restrictions (1 here)<br />
+<span class="math notranslate nohighlight">\(k\)</span> = number of parameters in the unrestricted regression (3 here)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">output</span><span class="o">/</span><span class="n">labor</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">capital</span><span class="o">/</span><span class="n">labor</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model3</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)       </td><td>3.7562419</td><td>0.18536786</td><td>20.263717</td><td>1.816211e-25</td></tr>
+	<tr><td>log(capital/labor)</td><td>0.5237564</td><td>0.09581225</td><td> 5.466487</td><td>1.535206e-06</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.3788227</td><td>0.3661456</td><td>0.2644047</td><td>29.88247</td><td>1.535206e-06</td><td>1</td><td>-3.501733</td><td>13.00347</td><td>18.79894</td><td>3.425582</td><td>49</td><td>51</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">model3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = log(output/labor) ~ log(capital/labor), data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.43644 -0.12465 -0.05083  0.04356  1.23075 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         3.75624    0.18537  20.264  &lt; 2e-16 ***
+log(capital/labor)  0.52376    0.09581   5.466 1.54e-06 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.2644 on 49 degrees of freedom
+Multiple R-squared:  0.3788,	Adjusted R-squared:  0.3661 
+F-statistic: 29.88 on 1 and 49 DF,  p-value: 1.535e-06
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A anova: 3 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>lnlabor</th><td> 1</td><td>89.864812</td><td>89.86481250</td><td>1262.91571</td><td>3.933902e-36</td></tr>
+	<tr><th scope=row>lncapital</th><td> 1</td><td> 2.059801</td><td> 2.05980082</td><td>  28.94742</td><td>2.183108e-06</td></tr>
+	<tr><th scope=row>Residuals</th><td>48</td><td> 3.415518</td><td> 0.07115662</td><td>        NA</td><td>          NA</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="nf">anova</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="nf">anova</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'Df'</li><li>'Sum Sq'</li><li>'Mean Sq'</li><li>'F value'</li><li>'Pr(&gt;F)'</li></ol>
+</div><div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'lnlabor'</li><li>'lncapital'</li><li>'Residuals'</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">RSSur</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">anova</span><span class="p">(</span><span class="n">model</span><span class="p">)[</span><span class="s">&quot;Residuals&quot;</span><span class="p">,</span><span class="s">&quot;Sum Sq&quot;</span><span class="p">])</span>
+<span class="p">(</span><span class="n">DFur</span><span class="w"> </span><span class="o">&lt;-</span><span class="nf">anova</span><span class="p">(</span><span class="n">model</span><span class="p">)[</span><span class="s">&quot;Residuals&quot;</span><span class="p">,</span><span class="s">&quot;Df&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3.41551772437328</div><div class="output text_html">48</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">anova</span><span class="p">(</span><span class="n">model3</span><span class="p">)</span>
+<span class="p">(</span><span class="n">RSSr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">anova</span><span class="p">(</span><span class="n">model3</span><span class="p">)[</span><span class="s">&quot;Residuals&quot;</span><span class="p">,</span><span class="s">&quot;Sum Sq&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A anova: 2 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>Df</th><th scope=col>Sum Sq</th><th scope=col>Mean Sq</th><th scope=col>F value</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>log(capital/labor)</th><td> 1</td><td>2.089079</td><td>2.08907903</td><td>29.88247</td><td>1.535206e-06</td></tr>
+	<tr><th scope=row>Residuals</th><td>49</td><td>3.425582</td><td>0.06990984</td><td>      NA</td><td>          NA</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html">3.42558215188511</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">RSSr</span><span class="o">-</span><span class="n">RSSur</span><span class="p">)</span><span class="o">/</span><span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">RSSur</span><span class="o">/</span><span class="p">(</span><span class="n">DFur</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.141440495864081</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">p_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">DFur</span><span class="p">,</span><span class="w"> </span><span class="n">lower.tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.7085103234663</div></div>
+</div>
+<p><strong>conclusion</strong>: The restirction was correct, can use restricted model</p>
+</section>
+<section id="using-car-package">
+<h2>using car package<a class="headerlink" href="#using-car-package" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">unrestricted_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">labor</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">capital</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="n">hypothesis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;log(labor) + log(capital) = 1&quot;</span>
+
+<span class="p">(</span><span class="n">test_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">linearHypothesis</span><span class="p">(</span><span class="n">unrestricted_model</span><span class="p">,</span><span class="w"> </span><span class="n">hypothesis</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A anova: 2 × 6</caption>
+<thead>
+	<tr><th></th><th scope=col>Res.Df</th><th scope=col>RSS</th><th scope=col>Df</th><th scope=col>Sum of Sq</th><th scope=col>F</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>49</td><td>3.425582</td><td>NA</td><td>        NA</td><td>       NA</td><td>       NA</td></tr>
+	<tr><th scope=row>2</th><td>48</td><td>3.415520</td><td> 1</td><td>0.01006201</td><td>0.1414065</td><td>0.7085437</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="log-lin-model-growth-model">
+<h1>Log-lin model (growth model)<a class="headerlink" href="#log-lin-model-growth-model" title="Link to this heading">#</a></h1>
+<div class="math notranslate nohighlight">
+\[
+\text{RGDP}_t = \text{RGDP}_{1960}(1+r)^t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\ln \text{RGDP}_t = \ln \text{RGDP}_{1960}+ t \ln(1+r)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\ln \text{RGDP}_t = \beta_0 + \beta_1t + u_t
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table2_5.xls&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
+<span class="nf">tail</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 4</caption>
+<thead>
+	<tr><th scope=col>rgdp</th><th scope=col>time</th><th scope=col>time2</th><th scope=col>lnrgdp</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>2501.8</td><td>1</td><td>1</td><td>7.824766</td></tr>
+	<tr><td>2560.0</td><td>2</td><td>4</td><td>7.847763</td></tr>
+	<tr><td>2715.2</td><td>3</td><td>9</td><td>7.906621</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 4</caption>
+<thead>
+	<tr><th scope=col>rgdp</th><th scope=col>time</th><th scope=col>time2</th><th scope=col>lnrgdp</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>10989.5</td><td>46</td><td>2116</td><td>9.304695</td></tr>
+	<tr><td>11294.8</td><td>47</td><td>2209</td><td>9.332098</td></tr>
+	<tr><td>11523.9</td><td>48</td><td>2304</td><td>9.352179</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Data shows Real GDP for USA for 1960-2007</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">lnrgdp</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model4</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>7.87566236</td><td>0.0097591072</td><td>807.00644</td><td>3.931863e-97</td></tr>
+	<tr><td>time       </td><td>0.03148955</td><td>0.0003467383</td><td> 90.81649</td><td>1.519344e-53</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9944536</td><td>0.994333</td><td>0.03327965</td><td>8247.634</td><td>1.519344e-53</td><td>1</td><td>96.24722</td><td>-186.4944</td><td>-180.8808</td><td>0.05094662</td><td>46</td><td>48</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><strong>Time Coefficient:</strong> Real GDP increases at raate 3.15% per year</p>
+<p><strong>Intercept result:</strong> exp(7.87) = 2632.27 is the beginning value of real GDP at the beginning of 1960</p>
+<p><strong>compound interest:</strong> <span class="math notranslate nohighlight">\(\beta_2 = \ln(1+r)\)</span>. r = exp(<span class="math notranslate nohighlight">\(\beta_2\)</span>)-1, r = 3.2%</p>
+<section id="compare-it-with-linear-model">
+<h2>Compare it with linear model<a class="headerlink" href="#compare-it-with-linear-model" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[
+RGDP_t = \beta_0  + \beta_1 \text{time} + u_t
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">rgdp</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>1664.2176</td><td>131.998983</td><td>12.60781</td><td>1.570394e-16</td></tr>
+	<tr><td>time       </td><td> 186.9939</td><td>  4.689886</td><td>39.87174</td><td>2.523710e-37</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9718784</td><td>0.9712671</td><td>450.1314</td><td>1589.756</td><td>2.52371e-37</td><td>1</td><td>-360.3455</td><td>726.691</td><td>732.3046</td><td>9320439</td><td>46</td><td>48</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><strong>Time coefficient:</strong> real gdp increases by $187 billion per year showing positive trend</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="o">$</span><span class="n">residuals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">residuals</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+<span class="n">df2</span><span class="o">$</span><span class="n">fitted_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">fitted</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rgdp</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dependent vs independent Plot&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;real gdp&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/26b526b9c3268dc0012a3fbf4fde6d59e53a9407d352de995b62c627a1907463.png"><img alt="_images/26b526b9c3268dc0012a3fbf4fde6d59e53a9407d352de995b62c627a1907463.png" src="_images/26b526b9c3268dc0012a3fbf4fde6d59e53a9407d352de995b62c627a1907463.png" style="width: 420px; height: 420px;" /></a>
+</div>
+</div>
+</section>
+</section>
+<section id="lin-log-model">
+<h1>Lin-LOg model<a class="headerlink" href="#lin-log-model" title="Link to this heading">#</a></h1>
+<div class="math notranslate nohighlight">
+\[
+Y_i = \beta_0 + \beta_1 \ln X_i + u_i
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table2_8.xls&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
+<span class="nf">tail</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 6</caption>
+<thead>
+	<tr><th scope=col>fdho</th><th scope=col>expend</th><th scope=col>sfdho</th><th scope=col>lnexpend</th><th scope=col>expend_rec</th><th scope=col>expend2</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>6475</td><td>40516.75</td><td>0.15981045</td><td>10.609470</td><td>2.468115e-05</td><td>1641607040</td></tr>
+	<tr><td>3146</td><td>33540.50</td><td>0.09379705</td><td>10.420509</td><td>2.981470e-05</td><td>1124965120</td></tr>
+	<tr><td>1632</td><td> 5181.85</td><td>0.31494543</td><td> 8.552917</td><td>1.929813e-04</td><td>  26851570</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 6</caption>
+<thead>
+	<tr><th scope=col>fdho</th><th scope=col>expend</th><th scope=col>sfdho</th><th scope=col>lnexpend</th><th scope=col>expend_rec</th><th scope=col>expend2</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>5811</td><td>31922.20</td><td>0.1820363</td><td>10.371057</td><td>3.132616e-05</td><td>1019026816</td></tr>
+	<tr><td>4594</td><td>25357.25</td><td>0.1811711</td><td>10.140820</td><td>3.943645e-05</td><td> 642990144</td></tr>
+	<tr><td>2108</td><td> 7313.60</td><td>0.2882302</td><td> 8.897491</td><td>1.367316e-04</td><td>  53488748</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><strong>Engel expenditure function theory:</strong> the total
+expenditure that is devoted to food tends to increase in arithmetic progression as
+total expenditure increases in geometric proportion.<br />
+In other words:  share of expenditure on food decreases as total expenditure increases</p>
+<p><strong>Expend:</strong> total household expenditure<br />
+<strong>SFDHO:</strong> share of food expenditure<br />
+869 US households in 1995</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model6</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">sfdho</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">lnexpend</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df3</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model6</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td> 0.93038679</td><td>0.036366542</td><td> 25.58359</td><td>5.360528e-108</td></tr>
+	<tr><td>lnexpend   </td><td>-0.07773725</td><td>0.003590929</td><td>-21.64823</td><td> 2.011079e-83</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.3508757</td><td>0.350127</td><td>0.06875045</td><td>468.6456</td><td>2.011079e-83</td><td>1</td><td>1094.493</td><td>-2182.986</td><td>-2168.684</td><td>4.097984</td><td>867</td><td>869</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><strong>lnexpend coefficient:</strong> -0.08:<br />
+if expenditure increases by 1%, on average, sfhdo decreases by 0.0008 units<br />
+if expenditure increases by 100%, on average, sdfho decreases by 0.08 units</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span><span class="o">$</span><span class="n">residuals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">residuals</span><span class="p">(</span><span class="n">model6</span><span class="p">)</span>
+<span class="n">df3</span><span class="o">$</span><span class="n">fitted_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">fitted</span><span class="p">(</span><span class="n">model6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lnexpend</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sfdho</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;lm&#39;</span><span class="p">,</span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;independent vs dependent&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lnexpend&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sfdho&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/4c17861c950b3afea2d65680fe6e9aa1d638a218c6ac9a4af5dd400cef818031.png"><img alt="_images/4c17861c950b3afea2d65680fe6e9aa1d638a218c6ac9a4af5dd400cef818031.png" src="_images/4c17861c950b3afea2d65680fe6e9aa1d638a218c6ac9a4af5dd400cef818031.png" style="width: 420px; height: 420px;" /></a>
+</div>
+</div>
+</section>
+<section id="reciprocol-models">
+<h1>Reciprocol models<a class="headerlink" href="#reciprocol-models" title="Link to this heading">#</a></h1>
+<div class="math notranslate nohighlight">
+\[
+Y_i = \beta_0 + \beta_1 \left(\frac{1}{X_i}\right) + u_i
+\]</div>
+<p>Note:
+$<span class="math notranslate nohighlight">\(
+\frac{dY_i}{dX_i} = -\beta_1\left(\frac{1}{X_i}^2\right)
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model7</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">sfdho</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">expend</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df3</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model7</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>7.726305e-02</td><td> 0.004011685</td><td>19.2595</td><td>4.376382e-69</td></tr>
+	<tr><td>I(1/expend)</td><td>1.331338e+03</td><td>63.957133553</td><td>20.8161</td><td>2.303454e-78</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.3332359</td><td>0.3324669</td><td>0.06967833</td><td>433.31</td><td>2.303454e-78</td><td>1</td><td>1082.843</td><td>-2159.686</td><td>-2145.384</td><td>4.209346</td><td>867</td><td>869</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><strong>Intercept coeff:</strong> if expend increases indefinitely, sfdho will equal 8% or 0.08</p>
+<p><strong>slope coeff:</strong> positive slope, rate of change of sfdho with respect to expenditure is <strong>negative</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expend</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sfdho</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;independent vs dependent&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;expend&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sfdho&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/6357af8ebd6fe9c0b3315731264ec220d5bc77e2738a7b2063d20cd0d7129814.png"><img alt="_images/6357af8ebd6fe9c0b3315731264ec220d5bc77e2738a7b2063d20cd0d7129814.png" src="_images/6357af8ebd6fe9c0b3315731264ec220d5bc77e2738a7b2063d20cd0d7129814.png" style="width: 420px; height: 420px;" /></a>
+</div>
+</div>
+<p>lin-log model performed better than reciprocol model based on <span class="math notranslate nohighlight">\(R^2\)</span>, both have same dependent variable so we can compare using it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">model6</span><span class="p">)</span><span class="o">$</span><span class="n">r.squared</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">model7</span><span class="p">)</span><span class="o">$</span><span class="n">r.squared</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.350875735484601</div><div class="output text_html">0.333235927711165</div></div>
+</div>
+</section>
+<section id="polynomial-regression-model">
+<h1>Polynomial regression model<a class="headerlink" href="#polynomial-regression-model" title="Link to this heading">#</a></h1>
+<div class="math notranslate nohighlight">
+\[ RGDP_t = \beta_0 + \beta_1 \text{time} + \beta_2 \text{time}^2 + u_t\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model8</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">rgdp</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">time</span><span class="o">^</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model8</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>2651.380622</td><td>69.4908403</td><td>38.15439</td><td>6.449733e-36</td></tr>
+	<tr><td>time       </td><td>  68.534362</td><td> 6.5421140</td><td>10.47587</td><td>1.187953e-13</td></tr>
+	<tr><td>I(time^2)  </td><td>   2.417542</td><td> 0.1294432</td><td>18.67647</td><td>7.969017e-23</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9967866</td><td>0.9966438</td><td>153.8419</td><td>6979.431</td><td>8.066871e-57</td><td>2</td><td>-308.2845</td><td>624.5691</td><td>632.0539</td><td>1065030</td><td>45</td><td>48</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{dRGDP}{dtime} = \beta_1 + 2\beta_2\text{time} = 68.53 + 4.84 \text{time}
+\]</div>
+<p>The <strong>rate of change of RGDP</strong> increases with an increasing rate<br />
+unlike the linear model that showed constant rate $187</p>
+<section id="log-lin-model-with-quadratic-trend">
+<h2>Log-lin model with quadratic trend<a class="headerlink" href="#log-lin-model-with-quadratic-trend" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[ \ln RGDP_t = \beta_0 + \beta_1 \text{time} + \beta_2 \text{time}^2 + u_t\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{d \ln RGDP}{dtime} = \beta_1 + 2\beta_2\text{time} = 0.0365 - 0.0002\text{time}\]</div>
+<p>The model increases with a decreasing rate<br />
+unlike the quadratic RGDP model (model 8)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model9</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">lnrgdp</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">time</span><span class="o">^</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model9</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td> 7.8334797935</td><td>1.275348e-02</td><td>614.223018</td><td>6.228568e-90</td></tr>
+	<tr><td>time       </td><td> 0.0365514617</td><td>1.200658e-03</td><td> 30.442868</td><td>1.147864e-31</td></tr>
+	<tr><td>I(time^2)  </td><td>-0.0001033042</td><td>2.375639e-05</td><td> -4.348483</td><td>7.756188e-05</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9960946</td><td>0.9959211</td><td>0.02823421</td><td>5738.809</td><td>6.492039e-55</td><td>2</td><td>104.6665</td><td>-201.333</td><td>-193.8482</td><td>0.03587268</td><td>45</td><td>48</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><strong>rate of growth of RGDP</strong> decreases at rate 0.0002 per unit of time</p>
+</section>
+</section>
+<section id="comparing-linear-and-log-log-log-linear-models">
+<h1>Comparing linear and log-log (log-linear) models<a class="headerlink" href="#comparing-linear-and-log-log-log-linear-models" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">compare_models</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">dependent_var</span><span class="p">,</span><span class="w"> </span><span class="n">independent_vars</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">broom</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Step 1: Compute the geometric mean (GM) of the dependent variable</span>
+<span class="w">  </span><span class="n">geom_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">dependent_var</span><span class="p">]])))</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Step 2: Transform the dependent variable</span>
+<span class="w">  </span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">transformed_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="p">[[</span><span class="n">dependent_var</span><span class="p">]]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">geom_mean</span><span class="p">,</span>
+<span class="w">           </span><span class="n">log_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">transformed_output</span><span class="p">))</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Create formula strings for the models</span>
+<span class="w">  </span><span class="n">independent_vars_formula</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">independent_vars</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot; + &quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="n">linear_formula</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.formula</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;transformed_output ~&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">independent_vars_formula</span><span class="p">))</span>
+<span class="w">  </span><span class="n">log_linear_formula</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.formula</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;log_output ~&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;log(&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">independent_vars</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot; + &quot;</span><span class="p">)))</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Step 3: Estimate the linear model using transformed_output</span>
+<span class="w">  </span><span class="n">linear_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">linear_formula</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="w">  </span><span class="n">linear_model_tidy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tidy</span><span class="p">(</span><span class="n">linear_model</span><span class="p">)</span>
+<span class="w">  </span><span class="n">linear_model_rss</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">linear_model</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Step 4: Estimate the log-linear model using log_output</span>
+<span class="w">  </span><span class="n">log_linear_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">log_linear_formula</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="w">  </span><span class="n">log_linear_model_tidy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tidy</span><span class="p">(</span><span class="n">log_linear_model</span><span class="p">)</span>
+<span class="w">  </span><span class="n">log_linear_model_rss</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">log_linear_model</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Ensure residuals sum of squares matches expected values by directly comparing them</span>
+<span class="w">  </span><span class="n">rss1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">((</span><span class="n">df</span><span class="o">$</span><span class="n">transformed_output</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">linear_model</span><span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+<span class="w">  </span><span class="n">rss2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">((</span><span class="n">df</span><span class="o">$</span><span class="n">log_output</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">log_linear_model</span><span class="p">))</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w"> </span><span class="c1"># Number of observations</span>
+<span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Compute the likelihood ratio test statistic</span>
+<span class="w">  </span><span class="n">lambda</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">rss1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">rss2</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Compute the p-value from the chi-square distribution with 1 degree of freedom</span>
+<span class="w">  </span><span class="n">p_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pchisq</span><span class="p">(</span><span class="n">lambda</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Print results</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">linear_model_tidy</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">log_linear_model_tidy</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Compare RSS</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;RSS for linear model:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rss1</span><span class="p">))</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;RSS for log-linear model:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rss2</span><span class="p">))</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Lambda (test statistic):&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="p">))</span>
+<span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;P-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p_value</span><span class="p">))</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span>
+<span class="w">    </span><span class="n">linear_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">linear_model</span><span class="p">,</span>
+<span class="w">    </span><span class="n">log_linear_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log_linear_model</span><span class="p">,</span>
+<span class="w">    </span><span class="n">linear_model_rss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rss1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">log_linear_model_rss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rss2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lambda</span><span class="p">,</span>
+<span class="w">    </span><span class="n">p_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_value</span>
+<span class="w">  </span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">compare_models</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;output&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;labor&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;capital&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># A tibble: 3 × 5
+  term           estimate    std.error statistic  p.value
+  &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept) 0.0103      0.0549           0.187 8.53e<span class=" -Color -Color-Red">- 1</span>
+2 labor       0.00000211  0.000000310      6.80  1.50e<span class=" -Color -Color-Red">- 8</span>
+3 capital     0.000000437 0.0000000429    10.2   1.43e<span class=" -Color -Color-Red">-13</span>
+# A tibble: 3 × 5
+  term         estimate std.error statistic  p.value
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)   -<span class=" -Color -Color-Red">13.1</span>      0.396     -<span class=" -Color -Color-Red">32.9</span>  1.30e<span class=" -Color -Color-Red">-34</span>
+2 log(labor)      0.468    0.0989      4.73 1.98e<span class=" -Color -Color-Red">- 5</span>
+3 log(capital)    0.521    0.0969      5.38 2.18e<span class=" -Color -Color-Red">- 6</span>
+[1] &quot;RSS for linear model: 3.67211242597136&quot;
+[1] &quot;RSS for log-linear model: 3.41552013886784&quot;
+[1] &quot;Lambda (test statistic): 1.84715109633792&quot;
+[1] &quot;P-value: 0.825884897403209&quot;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>$linear_model
+
+Call:
+lm(formula = linear_formula, data = df)
+
+Coefficients:
+(Intercept)        labor      capital  
+  1.026e-02    2.107e-06    4.369e-07  
+
+
+$log_linear_model
+
+Call:
+lm(formula = log_linear_formula, data = df)
+
+Coefficients:
+ (Intercept)    log(labor)  log(capital)  
+    -13.0538        0.4683        0.5213  
+
+
+$linear_model_rss
+[1] 3.672112
+
+$log_linear_model_rss
+[1] 3.41552
+
+$lambda
+[1] 1.847151
+
+$p_value
+[1] 0.8258849
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="regression-on-standardized-variables">
+<h1>Regression on standardized variables<a class="headerlink" href="#regression-on-standardized-variables" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">standardize_variables</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">dependent_var</span><span class="p">,</span><span class="w"> </span><span class="n">independent_vars</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Standardize dependent variable</span>
+<span class="w">  </span><span class="n">df</span><span class="p">[[</span><span class="n">dependent_var</span><span class="p">]]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">dependent_var</span><span class="p">]],</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Standardize independent variables</span>
+<span class="w">  </span><span class="nf">for </span><span class="p">(</span><span class="n">var</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">independent_vars</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">df</span><span class="p">[[</span><span class="n">var</span><span class="p">]]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">var</span><span class="p">]],</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="nf">return</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Example usage</span>
+<span class="c1"># df_standardized &lt;- standardize_variables(df, &quot;output&quot;, c(&quot;labor&quot;, &quot;capital&quot;))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df_standardized</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">standardize_variables</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;output&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;labor&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;capital&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model10</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">output</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">labor</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">capital</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df_standardized</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model10</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>2.433157e-17</td><td>0.01966566</td><td>1.237262e-15</td><td>1.000000e+00</td></tr>
+	<tr><td>labor      </td><td>4.023881e-01</td><td>0.05918546</td><td>6.798766e+00</td><td>1.496564e-08</td></tr>
+	<tr><td>capital    </td><td>6.021852e-01</td><td>0.05918546</td><td>1.017455e+01</td><td>1.433023e-13</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9810653</td><td>0.9802763</td><td>0.1404409</td><td>1243.514</td><td>4.510314e-42</td><td>2</td><td>29.29145</td><td>-50.58289</td><td>-42.85559</td><td>0.9467354</td><td>48</td><td>51</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">intercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">tidy</span><span class="p">(</span><span class="n">model10</span><span class="p">)[[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">]]</span>
+
+<span class="nf">ifelse</span><span class="p">(</span><span class="n">intercept</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">.Machine</span><span class="o">$</span><span class="n">double.eps</span><span class="p">,</span>
+<span class="w">                 </span><span class="nf">paste</span><span class="p">(</span><span class="n">intercept</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;is almost zero&quot;</span><span class="p">),</span>
+<span class="w">                 </span><span class="nf">paste</span><span class="p">(</span><span class="n">intercept</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;is not almost zero&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">'2.43315712814819e-17 is almost zero'</div></div>
+</div>
+<p><strong>labor coefficient:</strong> if labor increases by one standard deviation unit, average value of output goes up by about 0.40 standard deviation units, cetris paribus</p>
+<p><strong>capital coefficient:</strong> if labor increases by one standard deviation unit, average value of output goes up by about 0.60 standard deviation units, cetris paribus</p>
+<p><strong>Note:</strong> same <span class="math notranslate nohighlight">\(R^2, t, F\)</span><br />
+does not mean that capital is more important than labor</p>
+</section>
+<section id="regression-through-the-origin-zero-intercept-model">
+<h1>Regression through the origin: zero intercept model<a class="headerlink" href="#regression-through-the-origin-zero-intercept-model" title="Link to this heading">#</a></h1>
+<section id="capital-asset-price-model-capm">
+<h2>capital asset price model (CAPM)<a class="headerlink" href="#capital-asset-price-model-capm" title="Link to this heading">#</a></h2>
+<p>\begin{align}
+(ER_i-r_f) &amp;= \beta_i(ER_m-r_f)\
+ER_i &amp;= \text{expected rate of return on security}\
+ER_m &amp;= \text{expected rate of return on market portfolio}\
+r_f &amp;= \text{risk free rate of return} \
+\beta_i &amp;= \text{systematic risk}
+\end{align}</p>
+<p>To estimate</p>
+<div class="math notranslate nohighlight">
+\[ (R_i-r_f) = \beta_i(R_m-r_f) + u_i\]</div>
+<p>Where <span class="math notranslate nohighlight">\(R_i, R_m\)</span> are observed rates of return</p>
+<p>Let</p>
+<p>\begin{align}
+Y_i = R_i - r_f = \text{rate of return on security i in excess of the risk-free rate of return}\
+X_i = R_m - r_f = \text{rate of return on market  in excess of the risk-free rate of return}
+\end{align}</p>
+<div class="math notranslate nohighlight">
+\[ Y_i = \beta X_i + u_i \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table2_15.xls&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df4</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">df4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 2</caption>
+<thead>
+	<tr><th scope=col>y</th><th scope=col>x</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td> 6.080228</td><td> 7.263448</td></tr>
+	<tr><td>-0.924186</td><td> 6.339896</td></tr>
+	<tr><td>-3.286174</td><td>-9.285217</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>240</li><li>2</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model11</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df4</span><span class="p">)</span>
+<span class="n">model12</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy</span><span class="p">(</span><span class="n">model11</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>x</td><td>1.155512</td><td>0.07439562</td><td>15.532</td><td>4.405444e-38</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.5023352</td><td>0.5002529</td><td>5.548786</td><td>NA</td><td>NA</td><td>NA</td><td>-751.3032</td><td>1506.606</td><td>1513.568</td><td>7358.578</td><td>239</td><td>240</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p><strong>Raw <span class="math notranslate nohighlight">\(R^2\)</span>:</strong>  0.5<br />
+proportion of variation around the origin</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy</span><span class="p">(</span><span class="n">model12</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>-0.4474811</td><td>0.36294281</td><td>-1.232925</td><td>2.188203e-01</td></tr>
+	<tr><td>x          </td><td> 1.1711284</td><td>0.07538643</td><td>15.535004</td><td>4.752177e-38</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.5034802</td><td>0.501394</td><td>5.542759</td><td>241.3363</td><td>4.752177e-38</td><td>1</td><td>-750.5392</td><td>1507.078</td><td>1517.52</td><td>7311.877</td><td>238</td><td>240</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">tidy</span><span class="p">(</span><span class="n">model12</span><span class="p">)[[</span><span class="m">1</span><span class="p">,</span><span class="s">&#39;p.value&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.218820272828606</div></div>
+</div>
+<p><strong>Intercept:</strong> not significant, use model11 instead</p>
+</section>
+</section>
+<section id="measures-of-goodness-of-fit">
+<h1>Measures of goodness of fit<a class="headerlink" href="#measures-of-goodness-of-fit" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;R Squared: &quot;</span><span class="p">,</span><span class="nf">glance</span><span class="p">(</span><span class="n">model12</span><span class="p">)</span><span class="o">$</span><span class="n">r.squared</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;R Squared:  0.503480169868958&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Adjusted R Squared: &quot;</span><span class="p">,</span><span class="nf">glance</span><span class="p">(</span><span class="n">model12</span><span class="p">)</span><span class="o">$</span><span class="n">adj.r.squared</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Adjusted R Squared:  0.501393952095298&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Akaike&#39;s Information Criteria: &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">glance</span><span class="p">(</span><span class="n">model12</span><span class="p">)</span><span class="o">$</span><span class="n">AIC</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Akaike&#39;s Information Criteria:  1507.07843469119&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Schwarz’s Information Criterion:&quot;</span><span class="p">,</span><span class="nf">glance</span><span class="p">(</span><span class="n">model12</span><span class="p">)</span><span class="o">$</span><span class="n">BIC</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Schwarz’s Information Criterion: 1517.52035146121&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Log Likelihood:&quot;</span><span class="p">,</span><span class="nf">glance</span><span class="p">(</span><span class="n">model12</span><span class="p">)</span><span class="o">$</span><span class="n">logLik</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Log Likelihood: -750.539217345594&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="nf">glance</span><span class="p">(</span><span class="n">model12</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'r.squared'</li><li>'adj.r.squared'</li><li>'sigma'</li><li>'statistic'</li><li>'p.value'</li><li>'df'</li><li>'logLik'</li><li>'AIC'</li><li>'BIC'</li><li>'deviance'</li><li>'df.residual'</li><li>'nobs'</li></ol>
+</div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>2.1<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Consider the following production function, known in the literature as the
+transcendental production function (TPF)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Q_i = B_1L_i^{\beta_2} K_i^{\beta_3} e^{\beta_4L_i+ \beta_5K_i}  \\
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\text{where Q, L, and K represent output, labor, and capital, respectively}\)</span></p>
+<section id="a">
+<h3>a<a class="headerlink" href="#a" title="Link to this heading">#</a></h3>
+<p>How would you linearize this function?</p>
+<div class="math notranslate nohighlight">
+\[
+\ln Q_i = \ln \beta_1 + \beta_2 \ln L_i + \beta_3 \ln K_i + \beta_4 L_i + \beta_5 K_i
+\]</div>
+</section>
+<section id="b">
+<h3>b<a class="headerlink" href="#b" title="Link to this heading">#</a></h3>
+<p>What is the interpretation of the various coefficients in the TPF?</p>
+<p><strong><span class="math notranslate nohighlight">\(\beta_1\)</span>:</strong> y intercept<br />
+<strong>labor:</strong> elasticity = <span class="math notranslate nohighlight">\(\beta_2 + \beta_4 L_i\)</span><br />
+<strong>capital:</strong>: elasticity = <span class="math notranslate nohighlight">\(\beta_3 + \beta_5 K_i\)</span></p>
+</section>
+<section id="c">
+<h3>c<a class="headerlink" href="#c" title="Link to this heading">#</a></h3>
+<p>Given the data in Table 2.1, estimate the parameters of the TPF</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table2_1.xls&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 12</caption>
+<thead>
+	<tr><th scope=col>obs</th><th scope=col>output</th><th scope=col>labor</th><th scope=col>capital</th><th scope=col>lnoutput</th><th scope=col>lnlabor</th><th scope=col>lncapital</th><th scope=col>lnoutlab</th><th scope=col>lncaplab</th><th scope=col>outputstar</th><th scope=col>capitalstar</th><th scope=col>laborstar</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>1</td><td> 38372840</td><td> 424471</td><td> 2689076</td><td>17.46286</td><td>12.958599</td><td>14.80471</td><td>4.504261</td><td>1.846109</td><td>-0.1079874</td><td> 0.06368887</td><td> 0.1343891</td></tr>
+	<tr><td>2</td><td>  1805427</td><td>  19895</td><td>   57997</td><td>14.40631</td><td> 9.898224</td><td>10.96815</td><td>4.508084</td><td>1.069923</td><td>-0.9230660</td><td>-0.90551400</td><td>-0.9410533</td></tr>
+	<tr><td>3</td><td> 23736129</td><td> 206893</td><td> 2308272</td><td>16.98251</td><td>12.239957</td><td>14.65201</td><td>4.742552</td><td>2.412053</td><td>-0.4342360</td><td>-0.07658678</td><td>-0.4439759</td></tr>
+	<tr><td>4</td><td> 26981983</td><td> 304055</td><td> 1376235</td><td>17.11068</td><td>12.624964</td><td>14.13486</td><td>4.485716</td><td>1.509898</td><td>-0.3618868</td><td>-0.41991854</td><td>-0.1857003</td></tr>
+	<tr><td>5</td><td>217546032</td><td>1809756</td><td>13554116</td><td>19.19792</td><td>14.408703</td><td>16.42220</td><td>4.789218</td><td>2.013498</td><td> 3.8857391</td><td> 4.06601191</td><td> 3.8167481</td></tr>
+	<tr><td>6</td><td> 19462751</td><td> 180366</td><td> 1790751</td><td>16.78401</td><td>12.102743</td><td>14.39815</td><td>4.681270</td><td>2.295402</td><td>-0.5294886</td><td>-0.26722449</td><td>-0.5144899</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model13</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">lnoutput</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">lnlabor</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lncapital</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">labor</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">capital</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df5</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model13</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model13</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 5 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td> 3.949841e+00</td><td>5.660371e-01</td><td> 6.9780608</td><td>9.829494e-09</td></tr>
+	<tr><td>lnlabor    </td><td> 5.208141e-01</td><td>1.347469e-01</td><td> 3.8651277</td><td>3.465680e-04</td></tr>
+	<tr><td>lncapital  </td><td> 4.717828e-01</td><td>1.231899e-01</td><td> 3.8297200</td><td>3.865161e-04</td></tr>
+	<tr><td>labor      </td><td>-2.519414e-07</td><td>4.201003e-07</td><td>-0.5997173</td><td>5.516375e-01</td></tr>
+	<tr><td>capital    </td><td> 3.552743e-08</td><td>5.299532e-08</td><td> 0.6703880</td><td>5.059624e-01</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9645228</td><td>0.9614378</td><td>0.271165</td><td>312.6518</td><td>1.032818e-32</td><td>4</td><td>-3.17825</td><td>18.3565</td><td>29.94745</td><td>3.382401</td><td>46</td><td>51</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">intercept</span><span class="w"> </span><span class="o">&lt;-</span><span class="nf">exp</span><span class="p">(</span><span class="nf">tidy</span><span class="p">(</span><span class="n">model13</span><span class="p">)[[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">51.9271343254996</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="nf">summarize</span><span class="p">(</span><span class="n">mean_labor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">labor</span><span class="p">),</span>
+<span class="w">         </span><span class="n">mean_capital</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">capital</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 2</caption>
+<thead>
+	<tr><th scope=col>mean_labor</th><th scope=col>mean_capital</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>373914.5</td><td>2516181</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;elasticity of labor at mean:&quot;</span><span class="p">,</span><span class="m">5.208141e-01</span><span class="o">+</span><span class="w"> </span><span class="m">-2.519414e-07</span><span class="o">*</span><span class="m">373914.5</span><span class="w"> </span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;elasticity of labor at mean: 0.4266095573897&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="d">
+<h3>d<a class="headerlink" href="#d" title="Link to this heading">#</a></h3>
+<p>Suppose you want to test the hypothesis that B4 = B5 = 0. How would you test these
+hypotheses? Show the necessary calculations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">full_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">labor</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">capital</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">labor</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">capital</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df5</span><span class="p">)</span>
+<span class="n">restricted_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">labor</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">capital</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df5</span><span class="p">)</span>
+
+
+<span class="p">(</span><span class="n">anova_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">anova</span><span class="p">(</span><span class="n">restricted_model</span><span class="p">,</span><span class="w"> </span><span class="n">full_model</span><span class="p">))</span>
+
+<span class="n">f_statistic</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">anova_result</span><span class="o">$</span><span class="bp">F</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
+<span class="n">p_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">anova_result</span><span class="o">$</span><span class="n">`Pr(&gt;F)`</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;F-statistic:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">f_statistic</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;P-value:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p_value</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="nf">if </span><span class="p">(</span><span class="n">p_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.05</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Reject the null hypothesis: There is evidence that at least one of beta_4 or beta_5 is not equal to zero.\n&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Fail to reject the null hypothesis: There is no evidence that beta_4 or beta_5 are different from zero.\n&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A anova: 2 × 6</caption>
+<thead>
+	<tr><th></th><th scope=col>Res.Df</th><th scope=col>RSS</th><th scope=col>Df</th><th scope=col>Sum of Sq</th><th scope=col>F</th><th scope=col>Pr(&gt;F)</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>48</td><td>3.415520</td><td>NA</td><td>        NA</td><td>       NA</td><td>       NA</td></tr>
+	<tr><th scope=row>2</th><td>46</td><td>3.382404</td><td> 2</td><td>0.03311649</td><td>0.2251887</td><td>0.7992404</td></tr>
+</tbody>
+</table>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F-statistic: 0.2251887 
+P-value: 0.7992404 
+Fail to reject the null hypothesis: There is no evidence that beta_4 or beta_5 are different from zero.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="e">
+<h3>e<a class="headerlink" href="#e" title="Link to this heading">#</a></h3>
+<p>How would you compute the output-labor and output capital elasticities for this model?
+Are they constant or variable?</p>
+<p>variable</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="one.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Wage Function</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="three.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Wage function</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cobb Douglas Function</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-log-model-double-log-constant-elasticity-log-linear">Log-log model (Double log) (Constant elasticity) (log-linear)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-model">linear model</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-restriction">Linear restriction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-calculation">Manual calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-car-package">using car package</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#log-lin-model-growth-model">Log-lin model (growth model)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-it-with-linear-model">Compare it with linear model</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lin-log-model">Lin-LOg model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reciprocol-models">Reciprocol models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression-model">Polynomial regression model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-lin-model-with-quadratic-trend">Log-lin model with quadratic trend</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-linear-and-log-log-log-linear-models">Comparing linear and log-log (log-linear) models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-on-standardized-variables">Regression on standardized variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-through-the-origin-zero-intercept-model">Regression through the origin: zero intercept model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capital-asset-price-model-capm">capital asset price model (CAPM)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#measures-of-goodness-of-fit">Measures of goodness of fit</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a">a</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b">b</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">c</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d">d</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e">e</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed H. Darwish
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

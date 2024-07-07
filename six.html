@@ -1,0 +1,1266 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>US Consumption function 1947-2000 &#8212; Econometrics by Example R Solutions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'six';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Breusch–Pagan (BP) test" href="five.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Econometrics by Example R Solutions - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Econometrics by Example R Solutions - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Econometrics by Example R Solutions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="one.html">Wage Function</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="two.html">Cobb Douglas Function</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="three.html">Wage function</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="four.html">Example</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="five.html">Breusch–Pagan (BP) test</a></li>
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">US Consumption function 1947-2000</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/42Ahmed/ecobyexampleR" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/42Ahmed/ecobyexampleR/issues/new?title=Issue%20on%20page%20%2Fsix.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/six.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>US Consumption function 1947-2000</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">US Consumption function 1947-2000</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-of-autocorrelation">Tests of autocorrelation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#durbin-watson-test">Durbin watson test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bruech-godfrey-general-test">Bruech Godfrey general test</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#remedial-measures">Remedial measures</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-difference">First Difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feasible-generalized-least-squares-fgls">feasible generalized least squares (FGLS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neweywest-method-of-correcting-ols-standard-errors">Newey–West method of correcting OLS standard errors</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">tidymodels</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">multcomp</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">lmtest</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">sandwich</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="us-consumption-function-1947-2000">
+<h1>US Consumption function 1947-2000<a class="headerlink" href="#us-consumption-function-1947-2000" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table6_1.xls&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 24</caption>
+<thead>
+	<tr><th scope=col>year</th><th scope=col>consumption</th><th scope=col>income</th><th scope=col>wealth</th><th scope=col>interest</th><th scope=col>lnconsump</th><th scope=col>lndpi</th><th scope=col>lnwealth</th><th scope=col>dlnconsump</th><th scope=col>dlndpi</th><th scope=col>⋯</th><th scope=col>rlnwealth</th><th scope=col>rinterest</th><th scope=col>dconsump</th><th scope=col>dincome</th><th scope=col>dwealth</th><th scope=col>rconsump</th><th scope=col>rincome</th><th scope=col>rwealth</th><th scope=col>rinterest2</th><th scope=col>time</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>⋯</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>21916</td><td> 976.4</td><td>1035.2</td><td>5166.815</td><td>-10.350940</td><td>6.883873</td><td>6.942350</td><td>8.550012</td><td>        NA</td><td>         NA</td><td>⋯</td><td>      NA</td><td>         NA</td><td>      NA</td><td>       NA</td><td>      NA</td><td>      NA</td><td>      NA</td><td>      NA</td><td>         NA</td><td>1</td></tr>
+	<tr><td>21916</td><td> 998.1</td><td>1090.0</td><td>5280.757</td><td> -4.719804</td><td>6.905853</td><td>6.993933</td><td>8.571825</td><td>0.02198076</td><td>0.051583290</td><td>⋯</td><td>5.795887</td><td>-1.35915709</td><td>21.69995</td><td>54.800049</td><td>113.9419</td><td>704.3560</td><td>778.5664</td><td>3726.352</td><td>-1.60578680</td><td>2</td></tr>
+	<tr><td>21916</td><td>1025.3</td><td>1095.6</td><td>5607.351</td><td>  1.044063</td><td>6.932741</td><td>6.999057</td><td>8.631834</td><td>0.02688742</td><td>0.005124092</td><td>⋯</td><td>5.848814</td><td> 2.57644486</td><td>27.20007</td><td> 5.599976</td><td>326.5942</td><td>725.0278</td><td>767.6801</td><td>4018.668</td><td> 2.46398711</td><td>3</td></tr>
+	<tr><td>21916</td><td>1090.9</td><td>1192.7</td><td>5759.515</td><td>  0.407346</td><td>6.994758</td><td>7.083975</td><td>8.658608</td><td>0.06201744</td><td>0.084917545</td><td>⋯</td><td>5.856105</td><td> 0.06836937</td><td>65.59998</td><td>97.099976</td><td>152.1641</td><td>782.4448</td><td>863.0954</td><td>4072.578</td><td> 0.09324604</td><td>4</td></tr>
+	<tr><td>21916</td><td>1107.1</td><td>1227.0</td><td>6086.056</td><td> -5.283152</td><td>7.009499</td><td>7.112328</td><td>8.713756</td><td>0.01474094</td><td>0.028352737</td><td>⋯</td><td>5.902559</td><td>-5.41540527</td><td>16.19995</td><td>34.300049</td><td>326.5410</td><td>778.9094</td><td>868.1835</td><td>4353.341</td><td>-5.40569973</td><td>5</td></tr>
+	<tr><td>21916</td><td>1142.4</td><td>1266.8</td><td>6243.864</td><td> -0.277011</td><td>7.040886</td><td>7.144249</td><td>8.739354</td><td>0.03138733</td><td>0.031921864</td><td>⋯</td><td>5.910253</td><td> 1.43827367</td><td>35.30005</td><td>39.800049</td><td>157.8076</td><td>809.3358</td><td>897.6646</td><td>4412.911</td><td> 1.31239307</td><td>6</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'year'</li><li>'consumption'</li><li>'income'</li><li>'wealth'</li><li>'interest'</li><li>'lnconsump'</li><li>'lndpi'</li><li>'lnwealth'</li><li>'dlnconsump'</li><li>'dlndpi'</li><li>'dlnwealth'</li><li>'dinterest'</li><li>'rlnconsump'</li><li>'rlndpi'</li><li>'rlnwealth'</li><li>'rinterest'</li><li>'dconsump'</li><li>'dincome'</li><li>'dwealth'</li><li>'rconsump'</li><li>'rincome'</li><li>'rwealth'</li><li>'rinterest2'</li><li>'time'</li></ol>
+</div></div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+\ln C_T = \beta_1 + \beta_2 \ln DPI_t + \beta_3 \ln W_t + \beta_4 R_t + u_t
+\]</div>
+<p>real consumption expenditure (C),<br />
+real (after tax) disposable personal income (DPI),<br />
+real wealth (W)<br />
+and real interest rate (R)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">lnconsump</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">lndpi</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lnwealth</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="n">interest</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 4 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)</td><td>-0.467712044</td><td>0.0427779986</td><td>-10.933472</td><td>7.330410e-15</td></tr>
+	<tr><td>lndpi      </td><td> 0.804872759</td><td>0.0174978490</td><td> 45.998383</td><td>1.376236e-42</td></tr>
+	<tr><td>lnwealth   </td><td> 0.201270215</td><td>0.0175925850</td><td> 11.440628</td><td>1.433544e-15</td></tr>
+	<tr><td>interest   </td><td>-0.002689061</td><td>0.0007619294</td><td> -3.529279</td><td>9.046458e-04</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9995597</td><td>0.9995332</td><td>0.01193375</td><td>37832.66</td><td>7.120776e-84</td><td>3</td><td>164.588</td><td>-319.1761</td><td>-309.2312</td><td>0.007120721</td><td>50</td><td>54</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>if real personal disposal income goes up by 1%, mean
+real consumption expenditure goes up by about 0.8%</p>
+<p>if real wealth goes up by 1%, mean real consumption expenditure
+goes up by about 0.2%,</p>
+<p>if rate goes up by one percentage point, mean real consumption
+expenditure goes down by about 0.26%</p>
+<p><span class="math notranslate nohighlight">\(R^2\)</span> indicating <strong>spurious correlation</strong></p>
+</section>
+<section id="tests-of-autocorrelation">
+<h1>Tests of autocorrelation<a class="headerlink" href="#tests-of-autocorrelation" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">augment</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">$</span><span class="n">.resid</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/6a3ba80af82312e4d24489d3148c7d9db2a07af2c8a69d02540a3db91cf090d2.png"><img alt="_images/6a3ba80af82312e4d24489d3148c7d9db2a07af2c8a69d02540a3db91cf090d2.png" src="_images/6a3ba80af82312e4d24489d3148c7d9db2a07af2c8a69d02540a3db91cf090d2.png" style="width: 420px; height: 420px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">augment</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">$</span><span class="n">.std.resid</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/f15753b446692c94bf65c4b439d864d5658cdbd5b8193a5142ee9c87b60b627a.png"><img alt="_images/f15753b446692c94bf65c4b439d864d5658cdbd5b8193a5142ee9c87b60b627a.png" src="_images/f15753b446692c94bf65c4b439d864d5658cdbd5b8193a5142ee9c87b60b627a.png" style="width: 420px; height: 420px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">augmented_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">augment</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">augmented_data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq_along</span><span class="p">(</span><span class="n">.resid</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.resid</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_line</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Residuals from Linear Model&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Observation&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Residuals&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/58ddc665f281bc726051c39b610cd903b43ab2767b383fb9174bc4489cc2947b.png"><img alt="_images/58ddc665f281bc726051c39b610cd903b43ab2767b383fb9174bc4489cc2947b.png" src="_images/58ddc665f281bc726051c39b610cd903b43ab2767b383fb9174bc4489cc2947b.png" style="width: 420px; height: 420px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">augmented_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">augmented_data</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">lagged_resid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">lag</span><span class="p">(</span><span class="n">.resid</span><span class="p">))</span>
+
+<span class="c1"># remove first row of NA lagged residual</span>
+<span class="n">augmented_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">augmented_data</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">lagged_resid</span><span class="p">))</span>
+
+<span class="n">correlation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor</span><span class="p">(</span><span class="n">augmented_data</span><span class="o">$</span><span class="n">.resid</span><span class="p">,</span><span class="w"> </span><span class="n">augmented_data</span><span class="o">$</span><span class="n">lagged_resid</span><span class="p">)</span>
+
+
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">augmented_data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lagged_resid</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.resid</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lm&quot;</span><span class="p">,</span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;y ~ x&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Residuals vs Lagged Residuals&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Lagged Residuals&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Residuals&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_minimal</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/d5c49398852e87ec425f661b1020adff69ff27e5b732ae977c16629cc3cc12e2.png"><img alt="_images/d5c49398852e87ec425f661b1020adff69ff27e5b732ae977c16629cc3cc12e2.png" src="_images/d5c49398852e87ec425f661b1020adff69ff27e5b732ae977c16629cc3cc12e2.png" style="width: 420px; height: 420px;" /></a>
+</div>
+</div>
+<section id="durbin-watson-test">
+<h2>Durbin watson test<a class="headerlink" href="#durbin-watson-test" title="Link to this heading">#</a></h2>
+<p>must have an intercept term</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">durbinWatsonTest</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> lag Autocorrelation D-W Statistic p-value
+   1       0.2977555      1.289232   0.002
+ Alternative hypothesis: rho != 0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">durbinWatsonTest</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">max.lag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> lag Autocorrelation D-W Statistic p-value
+   1      0.29775555      1.289232   0.002
+   2     -0.02840613      1.933710   0.698
+   3      0.01631809      1.678649   0.198
+ Alternative hypothesis: rho[lag] != 0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dwtest</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Durbin-Watson test
+
+data:  model
+DW = 1.2892, p-value = 0.0009445
+alternative hypothesis: true autocorrelation is greater than 0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="bruech-godfrey-general-test">
+<h2>Bruech Godfrey general test<a class="headerlink" href="#bruech-godfrey-general-test" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">bgtest</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Breusch-Godfrey test for serial correlation of order up to 1
+
+data:  model
+LM test = 5.312, df = 1, p-value = 0.02118
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">bgtest</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Breusch-Godfrey test for serial correlation of order up to 2
+
+data:  model
+LM test = 6.4472, df = 2, p-value = 0.03981
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">bgtest</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Breusch-Godfrey test for serial correlation of order up to 3
+
+data:  model
+LM test = 6.6573, df = 3, p-value = 0.08366
+</pre></div>
+</div>
+</div>
+</div>
+<p>AR(2) is significant, residuals follow AR(2)</p>
+</section>
+</section>
+<section id="remedial-measures">
+<h1>Remedial measures<a class="headerlink" href="#remedial-measures" title="Link to this heading">#</a></h1>
+<section id="first-difference">
+<h2>First Difference<a class="headerlink" href="#first-difference" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[ u_t - \rho u_{t-1} = v_t \]</div>
+<p>\begin{align}
+\ln C_t- \rho \ln C_{t-1}&amp;= \beta_{1(1- \rho)} \  &amp;+ \beta_2 (\ln DPI_t - \rho \ln DPI_{t-1})\
+&amp;+ \beta_3 (\ln W_t - \rho \ln W_{t-1}) \
+&amp;+ \beta_4 (R_t - R_{t-1}) \
+&amp;+ (u_t - \rho u_{t-1})
+\end{align}</p>
+<p>if <span class="math notranslate nohighlight">\(\rho\)</span> = 1</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta \ln C_t = \beta_2 \Delta \ln DPI_t + \beta_3 \Delta \ln W_t + \beta_4 \Delta R_t + v_t
+\]</div>
+<p>Called <strong>first difference transformation</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="nf">diff</span><span class="p">(</span><span class="n">lnconsump</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">+</span><span class="nf">diff</span><span class="p">(</span><span class="n">lndpi</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">diff</span><span class="p">(</span><span class="n">lnwealth</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="nf">diff</span><span class="p">(</span><span class="n">interest</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>diff(lndpi)   </td><td>0.8489940413</td><td>0.0515376309</td><td>16.4732842</td><td>7.667028e-22</td></tr>
+	<tr><td>diff(lnwealth)</td><td>0.1063549555</td><td>0.0368543147</td><td> 2.8858210</td><td>5.749199e-03</td></tr>
+	<tr><td>diff(interest)</td><td>0.0006530138</td><td>0.0008260853</td><td> 0.7904919</td><td>4.329740e-01</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9236527</td><td>0.9190718</td><td>0.0111335</td><td>201.6339</td><td>6.473553e-28</td><td>3</td><td>164.7236</td><td>-321.4472</td><td>-313.5661</td><td>0.006197738</td><td>50</td><td>53</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">bgtest</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Breusch-Godfrey test for serial correlation of order up to 1
+
+data:  model2
+LM test = 0.86275, df = 1, p-value = 0.353
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dwtest</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Durbin-Watson test
+
+data:  model2
+DW = 2.0265, p-value = 0.547
+alternative hypothesis: true autocorrelation is greater than 0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">durbinWatsonTest</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> lag Autocorrelation D-W Statistic p-value
+   1      -0.1150018      2.026542   0.906
+ Alternative hypothesis: rho != 0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="feasible-generalized-least-squares-fgls">
+<h2>feasible generalized least squares (FGLS)<a class="headerlink" href="#feasible-generalized-least-squares-fgls" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">residuals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">augment</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">$</span><span class="n">.resid</span>
+<span class="n">residuals</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>0.0151792320906274</li><li>0.00639409190557938</li><li>0.0325786316647871</li><li>0.0191471920745867</li><li>-0.0153337901242683</li><li>-0.00132990098127195</li><li>0.00653719274943132</li><li>0.00162048925147751</li><li>0.00975015218633235</li><li>-0.00722925871798008</li><li>0.000174758857319546</li><li>-0.0146975939327243</li><li>0.00380689173579718</li><li>0.00454249958702402</li><li>-0.0167822153758674</li><li>-0.0091399779495811</li><li>-0.00422252846219351</li><li>-0.014143908709439</li><li>-0.011875949295832</li><li>0.00245712248775831</li><li>-0.0184412867267767</li><li>-0.0138427704324453</li><li>0.00757496364792853</li><li>-0.00357671809715665</li><li>-0.0171562076207774</li><li>-0.0124861952550575</li><li>-0.00754242394929072</li><li>0.00245643437586018</li><li>-0.0102882063980623</li><li>0.00718617423785339</li><li>0.0143585227051846</li><li>0.0127678086817866</li><li>0.0070919535900682</li><li>-0.00903155158175295</li><li>-0.00726634215564381</li><li>-0.0109670199434095</li><li>0.0110890173466256</li><li>0.000254097439515988</li><li>0.00116108304687401</li><li>0.000586076244815104</li><li>0.00687811518401915</li><li>0.00293814373603141</li><li>8.79859166129648e-05</li><li>0.00366504301640092</li><li>-0.0140024869709681</li><li>-0.0155797023743123</li><li>-0.00012753645438579</li><li>0.0196279528980181</li><li>0.0142734120216019</li><li>0.0108911843032331</li><li>0.000420259520168997</li><li>-0.0108587536823013</li><li>-0.00387038232170589</li><li>0.024296225009854</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">residuals</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">lag</span><span class="p">(</span><span class="n">residuals</span><span class="p">)))</span>
+<span class="n">rho</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><strong>lag(residuals):</strong> 0.324670692527429</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dwtest</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Durbin-Watson test
+
+data:  model
+DW = 1.2892, p-value = 0.0009445
+alternative hypothesis: true autocorrelation is greater than 0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">durbinWatsonTest</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> lag Autocorrelation D-W Statistic p-value
+   1       0.2977555      1.289232   0.002
+ Alternative hypothesis: rho != 0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rho2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="m">1.289232</span><span class="o">/</span><span class="m">2</span><span class="p">)</span><span class="w"> </span>
+<span class="n">rho2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.355384</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">fgls_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="nf">I</span><span class="p">(</span><span class="n">lnconsump</span><span class="o">-</span><span class="n">rho</span><span class="o">*</span><span class="nf">lag</span><span class="p">(</span><span class="n">lnconsump</span><span class="p">))</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">lndpi</span><span class="o">-</span><span class="n">rho</span><span class="o">*</span><span class="nf">lag</span><span class="p">(</span><span class="n">lndpi</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">                 </span><span class="nf">I</span><span class="p">(</span><span class="n">lnwealth</span><span class="o">-</span><span class="n">rho</span><span class="o">*</span><span class="nf">lag</span><span class="p">(</span><span class="n">lnwealth</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">interest</span><span class="o">-</span><span class="n">rho</span><span class="o">*</span><span class="nf">lag</span><span class="p">(</span><span class="n">interest</span><span class="p">))</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">fgls_model</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">fgls_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 4 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)                      </td><td>-2.797310e-01</td><td>0.033726467</td><td>-8.2941093</td><td>6.807447e-11</td></tr>
+	<tr><td>I(lndpi - rho * lag(lndpi))      </td><td> 8.187056e-01</td><td>0.021096888</td><td>38.8069362</td><td>1.878713e-38</td></tr>
+	<tr><td>I(lnwealth - rho * lag(lnwealth))</td><td> 1.836285e-01</td><td>0.020987236</td><td> 8.7495302</td><td>1.396990e-11</td></tr>
+	<tr><td>I(interest - rho * lag(interest))</td><td>-1.799604e-05</td><td>0.000969139</td><td>-0.0185691</td><td>9.852603e-01</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9992348</td><td>0.999188</td><td>0.0104226</td><td>21330.12</td><td>2.542681e-76</td><td>3</td><td>168.756</td><td>-327.512</td><td>-317.6606</td><td>0.005322902</td><td>49</td><td>53</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">bgtest</span><span class="p">(</span><span class="n">fgls_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Breusch-Godfrey test for serial correlation of order up to 1
+
+data:  fgls_model
+LM test = 2.8168, df = 1, p-value = 0.09328
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dwtest</span><span class="p">(</span><span class="n">fgls_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Durbin-Watson test
+
+data:  fgls_model
+DW = 1.449, p-value = 0.008542
+alternative hypothesis: true autocorrelation is greater than 0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">durbinWatsonTest</span><span class="p">(</span><span class="n">fgls_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> lag Autocorrelation D-W Statistic p-value
+   1       0.2092955      1.448986   0.016
+ Alternative hypothesis: rho != 0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dynlm</span><span class="p">)</span>
+
+
+<span class="c1"># Create the FGLS formula</span>
+<span class="n">fgls_formula</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.formula</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;I(lnconsump - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(lnconsump)) ~ &quot;</span><span class="p">,</span>
+<span class="w">                                 </span><span class="s">&quot;I(lndpi - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(lndpi)) + &quot;</span><span class="p">,</span>
+<span class="w">                                 </span><span class="s">&quot;I(lnwealth - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(lnwealth)) + &quot;</span><span class="p">,</span>
+<span class="w">                                 </span><span class="s">&quot;I(interest - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(interest))&quot;</span>
+<span class="p">))</span>
+
+<span class="c1"># Fit the FGLS model using dynlm</span>
+<span class="n">fgls_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dynlm</span><span class="p">(</span><span class="n">fgls_formula</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Tidy model coefficients</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">fgls_model</span><span class="p">)</span>
+
+<span class="c1"># Model summary</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">fgls_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 4 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)                                    </td><td>-2.797310e-01</td><td>0.033726467</td><td>-8.2941093</td><td>6.807447e-11</td></tr>
+	<tr><td>I(lndpi - 0.324670692527429 * lag(lndpi))      </td><td> 8.187056e-01</td><td>0.021096888</td><td>38.8069362</td><td>1.878713e-38</td></tr>
+	<tr><td>I(lnwealth - 0.324670692527429 * lag(lnwealth))</td><td> 1.836285e-01</td><td>0.020987236</td><td> 8.7495302</td><td>1.396990e-11</td></tr>
+	<tr><td>I(interest - 0.324670692527429 * lag(interest))</td><td>-1.799604e-05</td><td>0.000969139</td><td>-0.0185691</td><td>9.852603e-01</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9992348</td><td>0.999188</td><td>0.0104226</td><td>21330.12</td><td>2.542681e-76</td><td>3</td><td>168.756</td><td>-327.512</td><td>-317.6606</td><td>0.005322902</td><td>49</td><td>53</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dynlm</span><span class="p">)</span>
+
+<span class="c1"># Fit the original model</span>
+<span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">lnconsump</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">lndpi</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lnwealth</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">interest</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Get residuals</span>
+<span class="n">residuals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">residuals</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Estimate AR(2) coefficients</span>
+<span class="n">ar_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">residuals</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">lag</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">lag</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+<span class="n">rho1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">ar_model</span><span class="p">)[</span><span class="m">2</span><span class="p">]</span>
+<span class="n">rho2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">ar_model</span><span class="p">)[</span><span class="m">3</span><span class="p">]</span>
+
+<span class="c1"># Create the FGLS formula for AR(2)</span>
+<span class="n">fgls_formula</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.formula</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;I(lnconsump - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(lnconsump, 1) - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(lnconsump, 2)) ~ &quot;</span><span class="p">,</span>
+<span class="w">                                 </span><span class="s">&quot;I(lndpi - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(lndpi, 1) - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(lndpi, 2)) + &quot;</span><span class="p">,</span>
+<span class="w">                                 </span><span class="s">&quot;I(lnwealth - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(lnwealth, 1) - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(lnwealth, 2)) + &quot;</span><span class="p">,</span>
+<span class="w">                                 </span><span class="s">&quot;I(interest - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(interest, 1) - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rho2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* lag(interest, 2))&quot;</span>
+<span class="p">))</span>
+
+
+<span class="n">fgls_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">fgls_formula</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+
+<span class="nf">tidy</span><span class="p">(</span><span class="n">fgls_model</span><span class="p">)</span>
+
+<span class="nf">glance</span><span class="p">(</span><span class="n">fgls_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 4 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)                                                                               </td><td>-0.3402025749</td><td>0.037997412</td><td>-8.9533091</td><td>8.307709e-12</td></tr>
+	<tr><td>I(lndpi - 0.375966677578179 * lag(lndpi, 1) - -0.159419476639279 * lag(lndpi, 2))         </td><td> 0.8121613433</td><td>0.019923567</td><td>40.7638520</td><td>6.679649e-39</td></tr>
+	<tr><td>I(lnwealth - 0.375966677578179 * lag(lnwealth, 1) - -0.159419476639279 * lag(lnwealth, 2))</td><td> 0.1913213476</td><td>0.019988221</td><td> 9.5717046</td><td>1.040704e-12</td></tr>
+	<tr><td>I(interest - 0.375966677578179 * lag(interest, 1) - -0.159419476639279 * lag(interest, 2))</td><td>-0.0007507104</td><td>0.001005589</td><td>-0.7465382</td><td>4.589834e-01</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9993667</td><td>0.9993271</td><td>0.01078611</td><td>25247.09</td><td>9.734735e-77</td><td>3</td><td>163.8301</td><td>-317.6602</td><td>-307.904</td><td>0.005584327</td><td>48</td><td>52</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="neweywest-method-of-correcting-ols-standard-errors">
+<h2>Newey–West method of correcting OLS standard errors<a class="headerlink" href="#neweywest-method-of-correcting-ols-standard-errors" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">NeweyWest</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 4 × 4 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>(Intercept)</th><th scope=col>lndpi</th><th scope=col>lnwealth</th><th scope=col>interest</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>(Intercept)</th><td> 1.971479e-03</td><td> 2.692235e-05</td><td>-2.333159e-04</td><td> 2.652791e-05</td></tr>
+	<tr><th scope=row>lndpi</th><td> 2.692235e-05</td><td> 2.628983e-04</td><td>-2.225614e-04</td><td>-6.845951e-06</td></tr>
+	<tr><th scope=row>lnwealth</th><td>-2.333159e-04</td><td>-2.225614e-04</td><td> 2.109662e-04</td><td> 2.866692e-06</td></tr>
+	<tr><th scope=row>interest</th><td> 2.652791e-05</td><td>-6.845951e-06</td><td> 2.866692e-06</td><td> 6.724860e-07</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="model-evaluation">
+<h1>Model Evaluation<a class="headerlink" href="#model-evaluation" title="Link to this heading">#</a></h1>
+<p>consider case of specification error</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">model4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">lnconsump</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">income</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lnwealth</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="n">interest</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">lag</span><span class="p">(</span><span class="n">lnconsump</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="nf">tidy</span><span class="p">(</span><span class="n">model4</span><span class="p">)</span>
+<span class="nf">glance</span><span class="p">(</span><span class="n">model4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 5 × 5</caption>
+<thead>
+	<tr><th scope=col>term</th><th scope=col>estimate</th><th scope=col>std.error</th><th scope=col>statistic</th><th scope=col>p.value</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>(Intercept)   </td><td>-0.316021364</td><td>0.0556667072</td><td>-5.6770264</td><td>7.777927e-07</td></tr>
+	<tr><td>log(income)   </td><td> 0.574833115</td><td>0.0696731710</td><td> 8.2504227</td><td>9.237758e-11</td></tr>
+	<tr><td>lnwealth      </td><td> 0.150288163</td><td>0.0208376010</td><td> 7.2123544</td><td>3.477275e-09</td></tr>
+	<tr><td>interest      </td><td>-0.000675206</td><td>0.0008937643</td><td>-0.7554632</td><td>4.536624e-01</td></tr>
+	<tr><td>lag(lnconsump)</td><td> 0.276561599</td><td>0.0804719157</td><td> 3.4367468</td><td>1.225013e-03</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 12</caption>
+<thead>
+	<tr><th scope=col>r.squared</th><th scope=col>adj.r.squared</th><th scope=col>sigma</th><th scope=col>statistic</th><th scope=col>p.value</th><th scope=col>df</th><th scope=col>logLik</th><th scope=col>AIC</th><th scope=col>BIC</th><th scope=col>deviance</th><th scope=col>df.residual</th><th scope=col>nobs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0.9996454</td><td>0.9996159</td><td>0.01061906</td><td>33833.64</td><td>3.891148e-82</td><td>4</td><td>168.3127</td><td>-324.6254</td><td>-312.8037</td><td>0.005412694</td><td>48</td><td>53</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">bgtest</span><span class="p">(</span><span class="n">model4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	Breusch-Godfrey test for serial correlation of order up to 1
+
+data:  model4
+LM test = 4.4804, df = 1, p-value = 0.03429
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="five.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Breusch–Pagan (BP) test</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">US Consumption function 1947-2000</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-of-autocorrelation">Tests of autocorrelation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#durbin-watson-test">Durbin watson test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bruech-godfrey-general-test">Bruech Godfrey general test</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#remedial-measures">Remedial measures</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-difference">First Difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feasible-generalized-least-squares-fgls">feasible generalized least squares (FGLS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neweywest-method-of-correcting-ols-standard-errors">Newey–West method of correcting OLS standard errors</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed H. Darwish
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
