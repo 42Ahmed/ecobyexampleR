@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>US Consumption function 1947-2000 &#8212; Econometrics by Example R Solutions</title>
+    <title>6. Autocorrelation &#8212; Econometrics By Example R  By Ahmed H. Darwish</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -62,7 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'six';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Breusch–Pagan (BP) test" href="five.html" />
+    <link rel="next" title="7. Model Specification Errors" href="seven.html" />
+    <link rel="prev" title="5. Heteroscedasticity" href="five.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -149,14 +150,8 @@
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/logo.png" class="logo__image only-light" alt="Econometrics by Example R Solutions - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Econometrics by Example R Solutions - Home"/>`);</script>
   
+    <p class="title logo__title">Econometrics By Example R  By Ahmed H. Darwish</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -181,40 +176,27 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="one.html">Wage Function</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="two.html">Cobb Douglas Function</a></li>
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="three.html">Wage function</a></li>
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="four.html">Example</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="five.html">Breusch–Pagan (BP) test</a></li>
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">US Consumption function 1947-2000</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="one.html">1. The Linear Regression Model: An Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two.html">2. Functional Forms Of Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="three.html">3. Qualitative Explanatory Variables Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="four.html">4. multicollinearity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="five.html">5. Heteroscedasticity</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Autocorrelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seven.html">7. Model Specification Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eight.html">8. The Logit And Probit Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nine.html">9. Multinomial Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ten.html">10. Ordinal Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eleven.html">11. Limited Dependent Variable Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twelve.html">12. Modeling Count Data: The Poisson And Negative Binomial Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thirteen.html">13. Stationary And Nonstationary Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourteen.html">14. Cointegration And Error Correction Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fifteen.html">15. Asset Price Volatility: The ARCH And GARCH Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sixteen.html">16. Economic Forecasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seventeen.html">17. Panel Data Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eighteen.html">18. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nineteen.html">19. Stochastic Regressors And The Method Of Instrumental Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twenty.html">20. Beyond OLS: Quantile Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twentyone.html">21. Multivariate Regression Models</a></li>
 </ul>
 
     </div>
@@ -400,7 +382,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>US Consumption function 1947-2000</h1>
+    <h1>6. Autocorrelation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -410,21 +392,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">US Consumption function 1947-2000</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-of-autocorrelation">Tests of autocorrelation</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#durbin-watson-test">Durbin watson test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bruech-godfrey-general-test">Bruech Godfrey general test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#us-consumption-function-1947-2000">US Consumption function 1947-2000</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-of-autocorrelation">Tests of autocorrelation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#durbin-watson-test">Durbin watson test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bruech-godfrey-general-test">Bruech Godfrey general test</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#remedial-measures">Remedial measures</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-difference">First Difference</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feasible-generalized-least-squares-fgls">feasible generalized least squares (FGLS)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neweywest-method-of-correcting-ols-standard-errors">Newey–West method of correcting OLS standard errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remedial-measures">Remedial measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-difference">First Difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feasible-generalized-least-squares-fgls">feasible generalized least squares (FGLS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neweywest-method-of-correcting-ols-standard-errors">Newey–West method of correcting OLS standard errors</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -435,7 +417,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="autocorrelation">
+<h1>6. Autocorrelation<a class="headerlink" href="#autocorrelation" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
 <span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
@@ -451,10 +435,10 @@ document.write(`
 </div>
 </div>
 <section id="us-consumption-function-1947-2000">
-<h1>US Consumption function 1947-2000<a class="headerlink" href="#us-consumption-function-1947-2000" title="Link to this heading">#</a></h1>
+<h2>US Consumption function 1947-2000<a class="headerlink" href="#us-consumption-function-1947-2000" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table6_1.xls&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;data/Table6_1.xls&quot;</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -543,7 +527,7 @@ expenditure goes down by about 0.26%</p>
 <p><span class="math notranslate nohighlight">\(R^2\)</span> indicating <strong>spurious correlation</strong></p>
 </section>
 <section id="tests-of-autocorrelation">
-<h1>Tests of autocorrelation<a class="headerlink" href="#tests-of-autocorrelation" title="Link to this heading">#</a></h1>
+<h2>Tests of autocorrelation<a class="headerlink" href="#tests-of-autocorrelation" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">augment</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">$</span><span class="n">.resid</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;b&#39;</span><span class="p">)</span>
@@ -605,11 +589,11 @@ expenditure goes down by about 0.26%</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/d5c49398852e87ec425f661b1020adff69ff27e5b732ae977c16629cc3cc12e2.png"><img alt="_images/d5c49398852e87ec425f661b1020adff69ff27e5b732ae977c16629cc3cc12e2.png" src="_images/d5c49398852e87ec425f661b1020adff69ff27e5b732ae977c16629cc3cc12e2.png" style="width: 420px; height: 420px;" /></a>
+<a class="reference internal image-reference" href="_images/26df109911864c9537523ff68120fb0af2fc9593647507efe0a411f94b8e7a09.png"><img alt="_images/26df109911864c9537523ff68120fb0af2fc9593647507efe0a411f94b8e7a09.png" src="_images/26df109911864c9537523ff68120fb0af2fc9593647507efe0a411f94b8e7a09.png" style="width: 420px; height: 420px;" /></a>
 </div>
 </div>
 <section id="durbin-watson-test">
-<h2>Durbin watson test<a class="headerlink" href="#durbin-watson-test" title="Link to this heading">#</a></h2>
+<h3>Durbin watson test<a class="headerlink" href="#durbin-watson-test" title="Link to this heading">#</a></h3>
 <p>must have an intercept term</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -619,7 +603,7 @@ expenditure goes down by about 0.26%</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> lag Autocorrelation D-W Statistic p-value
-   1       0.2977555      1.289232   0.002
+   1       0.2977555      1.289232       0
  Alternative hypothesis: rho != 0
 </pre></div>
 </div>
@@ -633,9 +617,9 @@ expenditure goes down by about 0.26%</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> lag Autocorrelation D-W Statistic p-value
-   1      0.29775555      1.289232   0.002
-   2     -0.02840613      1.933710   0.698
-   3      0.01631809      1.678649   0.198
+   1      0.29775555      1.289232   0.000
+   2     -0.02840613      1.933710   0.694
+   3      0.01631809      1.678649   0.262
  Alternative hypothesis: rho[lag] != 0
 </pre></div>
 </div>
@@ -659,7 +643,7 @@ alternative hypothesis: true autocorrelation is greater than 0
 </div>
 </section>
 <section id="bruech-godfrey-general-test">
-<h2>Bruech Godfrey general test<a class="headerlink" href="#bruech-godfrey-general-test" title="Link to this heading">#</a></h2>
+<h3>Bruech Godfrey general test<a class="headerlink" href="#bruech-godfrey-general-test" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">bgtest</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
@@ -709,9 +693,9 @@ LM test = 6.6573, df = 3, p-value = 0.08366
 </section>
 </section>
 <section id="remedial-measures">
-<h1>Remedial measures<a class="headerlink" href="#remedial-measures" title="Link to this heading">#</a></h1>
+<h2>Remedial measures<a class="headerlink" href="#remedial-measures" title="Link to this heading">#</a></h2>
 <section id="first-difference">
-<h2>First Difference<a class="headerlink" href="#first-difference" title="Link to this heading">#</a></h2>
+<h3>First Difference<a class="headerlink" href="#first-difference" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ u_t - \rho u_{t-1} = v_t \]</div>
 <p>\begin{align}
@@ -798,7 +782,7 @@ alternative hypothesis: true autocorrelation is greater than 0
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> lag Autocorrelation D-W Statistic p-value
-   1      -0.1150018      2.026542   0.906
+   1      -0.1150018      2.026542   0.916
  Alternative hypothesis: rho != 0
 </pre></div>
 </div>
@@ -806,7 +790,7 @@ alternative hypothesis: true autocorrelation is greater than 0
 </div>
 </section>
 <section id="feasible-generalized-least-squares-fgls">
-<h2>feasible generalized least squares (FGLS)<a class="headerlink" href="#feasible-generalized-least-squares-fgls" title="Link to this heading">#</a></h2>
+<h3>feasible generalized least squares (FGLS)<a class="headerlink" href="#feasible-generalized-least-squares-fgls" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">residuals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">augment</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">$</span><span class="n">.resid</span>
@@ -857,7 +841,7 @@ alternative hypothesis: true autocorrelation is greater than 0
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> lag Autocorrelation D-W Statistic p-value
-   1       0.2977555      1.289232   0.002
+   1       0.2977555      1.289232   0.004
  Alternative hypothesis: rho != 0
 </pre></div>
 </div>
@@ -947,7 +931,7 @@ alternative hypothesis: true autocorrelation is greater than 0
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> lag Autocorrelation D-W Statistic p-value
-   1       0.2092955      1.448986   0.016
+   1       0.2092955      1.448986   0.014
  Alternative hypothesis: rho != 0
 </pre></div>
 </div>
@@ -977,6 +961,12 @@ alternative hypothesis: true autocorrelation is greater than 0
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;The `tidy()` method for objects of class `dynlm` is not maintained by the broom team, and is only supported through the `lm` tidier method. Please be cautious in interpreting and reporting broom output.
+
+This warning is displayed once per session.&quot;
+</pre></div>
+</div>
 <div class="output text_html"><table class="dataframe">
 <caption>A tibble: 4 × 5</caption>
 <thead>
@@ -1061,7 +1051,7 @@ alternative hypothesis: true autocorrelation is greater than 0
 </div>
 </section>
 <section id="neweywest-method-of-correcting-ols-standard-errors">
-<h2>Newey–West method of correcting OLS standard errors<a class="headerlink" href="#neweywest-method-of-correcting-ols-standard-errors" title="Link to this heading">#</a></h2>
+<h3>Newey–West method of correcting OLS standard errors<a class="headerlink" href="#neweywest-method-of-correcting-ols-standard-errors" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">NeweyWest</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
@@ -1086,7 +1076,7 @@ alternative hypothesis: true autocorrelation is greater than 0
 </section>
 </section>
 <section id="model-evaluation">
-<h1>Model Evaluation<a class="headerlink" href="#model-evaluation" title="Link to this heading">#</a></h1>
+<h2>Model Evaluation<a class="headerlink" href="#model-evaluation" title="Link to this heading">#</a></h2>
 <p>consider case of specification error</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1139,6 +1129,11 @@ LM test = 4.4804, df = 1, p-value = 0.03429
 </div>
 </div>
 </section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>🚧 Under Construction</p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1176,8 +1171,17 @@ LM test = 4.4804, df = 1, p-value = 0.03429
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Breusch–Pagan (BP) test</p>
+        <p class="prev-next-title">5. Heteroscedasticity</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="seven.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">7. Model Specification Errors</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -1195,21 +1199,21 @@ LM test = 4.4804, df = 1, p-value = 0.03429
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">US Consumption function 1947-2000</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-of-autocorrelation">Tests of autocorrelation</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#durbin-watson-test">Durbin watson test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bruech-godfrey-general-test">Bruech Godfrey general test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#us-consumption-function-1947-2000">US Consumption function 1947-2000</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tests-of-autocorrelation">Tests of autocorrelation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#durbin-watson-test">Durbin watson test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bruech-godfrey-general-test">Bruech Godfrey general test</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#remedial-measures">Remedial measures</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-difference">First Difference</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feasible-generalized-least-squares-fgls">feasible generalized least squares (FGLS)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neweywest-method-of-correcting-ols-standard-errors">Newey–West method of correcting OLS standard errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remedial-measures">Remedial measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-difference">First Difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feasible-generalized-least-squares-fgls">feasible generalized least squares (FGLS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neweywest-method-of-correcting-ols-standard-errors">Newey–West method of correcting OLS standard errors</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
@@ -1233,7 +1237,7 @@ By Ahmed H. Darwish
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>
