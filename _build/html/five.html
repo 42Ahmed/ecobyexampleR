@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Breusch–Pagan (BP) test &#8212; Econometrics by Example R Solutions</title>
+    <title>5. Heteroscedasticity &#8212; Econometrics By Example R  By Ahmed H. Darwish</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'five';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="US Consumption function 1947-2000" href="six.html" />
-    <link rel="prev" title="Example" href="four.html" />
+    <link rel="next" title="6. Autocorrelation" href="six.html" />
+    <link rel="prev" title="4. multicollinearity" href="four.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -150,14 +150,8 @@
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/logo.png" class="logo__image only-light" alt="Econometrics by Example R Solutions - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Econometrics by Example R Solutions - Home"/>`);</script>
   
+    <p class="title logo__title">Econometrics By Example R  By Ahmed H. Darwish</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -182,40 +176,27 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="one.html">Wage Function</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="two.html">Cobb Douglas Function</a></li>
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="three.html">Wage function</a></li>
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="four.html">Example</a></li>
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Breusch–Pagan (BP) test</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="six.html">US Consumption function 1947-2000</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="one.html">1. The Linear Regression Model: An Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two.html">2. Functional Forms Of Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="three.html">3. Qualitative Explanatory Variables Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="four.html">4. multicollinearity</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Heteroscedasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="six.html">6. Autocorrelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seven.html">7. Model Specification Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eight.html">8. The Logit And Probit Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nine.html">9. Multinomial Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ten.html">10. Ordinal Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eleven.html">11. Limited Dependent Variable Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twelve.html">12. Modeling Count Data: The Poisson And Negative Binomial Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thirteen.html">13. Stationary And Nonstationary Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fourteen.html">14. Cointegration And Error Correction Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fifteen.html">15. Asset Price Volatility: The ARCH And GARCH Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sixteen.html">16. Economic Forecasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seventeen.html">17. Panel Data Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eighteen.html">18. Survival analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nineteen.html">19. Stochastic Regressors And The Method Of Instrumental Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twenty.html">20. Beyond OLS: Quantile Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twentyone.html">21. Multivariate Regression Models</a></li>
 </ul>
 
     </div>
@@ -401,7 +382,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Breusch–Pagan (BP) test</h1>
+    <h1>5. Heteroscedasticity</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -411,13 +392,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Breusch–Pagan (BP) test</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#white-test">White test</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#abridged-white-test">Abridged white test</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#white-robust-standard-errors">White Robust standard errors</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breuschpagan-bp-test">Breusch–Pagan (BP) test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#white-test">White test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abridged-white-test">Abridged white test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#white-robust-standard-errors">White Robust standard errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -428,7 +408,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="heteroscedasticity">
+<h1>5. Heteroscedasticity<a class="headerlink" href="#heteroscedasticity" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
 <span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
@@ -445,7 +427,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table5_1.xls&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;data/Table5_1.xls&quot;</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -550,7 +532,7 @@ with physical contact or blocking of patients.</p>
 </div>
 </div>
 <section id="breuschpagan-bp-test">
-<h1>Breusch–Pagan (BP) test<a class="headerlink" href="#breuschpagan-bp-test" title="Link to this heading">#</a></h1>
+<h2>Breusch–Pagan (BP) test<a class="headerlink" href="#breuschpagan-bp-test" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">bptest</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">studentize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
@@ -568,7 +550,7 @@ BP = 16.001, df = 7, p-value = 0.02511
 </div>
 </section>
 <section id="white-test">
-<h1>White test<a class="headerlink" href="#white-test" title="Link to this heading">#</a></h1>
+<h2>White test<a class="headerlink" href="#white-test" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">white_test_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">bptest</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">religion</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">laws</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">funds</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">educ</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">income</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">picket</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">religion</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">price</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">laws</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">funds</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">educ</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">income</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">picket</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
@@ -602,7 +584,7 @@ Do not reject the null hypothesis of homoscedasticity. The model does not suffer
 </div>
 </section>
 <section id="abridged-white-test">
-<h1>Abridged white test<a class="headerlink" href="#abridged-white-test" title="Link to this heading">#</a></h1>
+<h2>Abridged white test<a class="headerlink" href="#abridged-white-test" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">augment</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
@@ -648,7 +630,7 @@ Do not reject the null hypothesis of homoscedasticity. The model does not suffer
 <p>p value for F = 0.006463723, we suffer from heteroscedasticity</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:/Datasets/Econometrics BY Example/Excel/Table5_1.xls&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;data/Table5_1.xls&quot;</span><span class="p">)</span>
 <span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">abortion</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">religion</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">laws</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">funds</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">educ</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">income</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">picket</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
 
 <span class="n">fitted_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">fitted</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
@@ -768,7 +750,7 @@ BP = 7.95, df = 7, p-value = 0.337
 </div>
 </section>
 <section id="white-robust-standard-errors">
-<h1>White Robust standard errors<a class="headerlink" href="#white-robust-standard-errors" title="Link to this heading">#</a></h1>
+<h2>White Robust standard errors<a class="headerlink" href="#white-robust-standard-errors" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">robust_se</span><span class="w"> </span><span class="o">&lt;-</span><span class="nf">coeftest</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">vcov</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">vcovHC</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;HC0&quot;</span><span class="p">))</span>
@@ -821,6 +803,10 @@ BP = 7.95, df = 7, p-value = 0.337
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original model not retained as part of coeftest object. For additional model summary information (r.squared, df, etc.), consider passing `glance.coeftest()` an object where the underlying model has been saved, i.e.`lmtest::coeftest(..., save = TRUE)`.
+This message is displayed once per session.
+</pre></div>
+</div>
 <div class="output text_html"><table class="dataframe">
 <caption>A tibble: 1 × 4</caption>
 <thead>
@@ -835,7 +821,7 @@ BP = 7.95, df = 7, p-value = 0.337
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;G:././././Datasets/Econometrics BY Example/Excel/Table1_1.xls&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="s">&quot;data/Table1_1.xls&quot;</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -949,7 +935,9 @@ BP = 55.327, df = 5, p-value = 1.118e-10
 </div>
 </section>
 <section id="exercises">
-<h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>🚧 Under Construction</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -988,7 +976,7 @@ BP = 55.327, df = 5, p-value = 1.118e-10
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Example</p>
+        <p class="prev-next-title">4. multicollinearity</p>
       </div>
     </a>
     <a class="right-next"
@@ -996,7 +984,7 @@ BP = 55.327, df = 5, p-value = 1.118e-10
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">US Consumption function 1947-2000</p>
+        <p class="prev-next-title">6. Autocorrelation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1016,13 +1004,12 @@ BP = 55.327, df = 5, p-value = 1.118e-10
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Breusch–Pagan (BP) test</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#white-test">White test</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#abridged-white-test">Abridged white test</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#white-robust-standard-errors">White Robust standard errors</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breuschpagan-bp-test">Breusch–Pagan (BP) test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#white-test">White test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abridged-white-test">Abridged white test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#white-robust-standard-errors">White Robust standard errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
@@ -1046,7 +1033,7 @@ By Ahmed H. Darwish
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>
