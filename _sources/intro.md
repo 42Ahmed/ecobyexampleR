@@ -1,6 +1,6 @@
-# Econometrics by Example R Solutions
+# Intro
 
-Welcome to the interactive R solutions book for "Econometrics by Example" by Damodar N. Gujarati. This JupyterBook is designed to provide detailed solutions to the examples and exercises in Gujarati's esteemed text, helping readers apply econometric techniques using R.
+Welcome to the interactive R book for "Econometrics by Example" by Damodar N. Gujarati. This Book is designed to provide detailed solutions to the examples and exercises in Gujarati's esteemed text, helping readers apply econometric techniques using R.
 
 ## Objectives
 
@@ -10,7 +10,7 @@ Interactive Learning: Enable readers to engage with econometric concepts through
 Structure
 The book is organized to follow the structure of Gujarati's textbook, with each chapter providing solutions to the relevant examples and exercises. R libraries such as tidyverse, lmtest, and ggplot2 are utilized to perform data manipulation, model estimation, and visualization.
 
-## How to Use This Book
+## How To Use This Book
 
 Read Alongside the Textbook: Use this book as a companion to Gujarati's textbook to reinforce your understanding of econometric concepts.
 Interactive Learning: Run the provided R code to see results, modify code to explore different scenarios, and deepen your comprehension through experimentation.
@@ -21,6 +21,14 @@ Raise Issues: If you encounter errors or have suggestions for improvement, pleas
 All code and solutions provided in this book are the result of my personal efforts and interpretations. While I strive for accuracy, there may be errors. Users are encouraged to critically evaluate the solutions and seek further clarification when necessary.
 
 We hope this interactive book enhances your learning experience and helps you master econometrics using R. Happy learning!
+
+## Also by US
+
+[Python For Introduction to Econometrics](https://42ahmed.github.io/stockpy/)  
+[Python For Introductory Econometrics](https://42ahmed.github.io/woolpy/)  
+[Mastering Python](https://42ahmed.github.io/mastering-python/)  
+
+## Table Of Contents
 
 ```{tableofcontents}
 ```
